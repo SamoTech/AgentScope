@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖 AgentScope - Live AI Agent News Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+</head>
+<body>
+    <header>
+        <h1>🤖 AgentScope</h1>
+        <p class="subtitle">Live AI Agent News Dashboard</p>
+        <div id="status">
+            <span id="lastUpdate">Loading news...</span>
+            <span id="articleCount"></span>
+            <span id="liveIndicator" class="live-dot">● LIVE</span>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="filters">
+            <input type="text" id="searchInput" placeholder="🔍 Search articles..." aria-label="Search articles">
+            <select id="sourceFilter" aria-label="Filter by source">
+                <option value="all">All Sources</option>
+            </select>
+            <button id="refreshBtn" title="Refresh news">🔄 Refresh</button>
+        </div>
+        
+        <div id="errorMessage" class="error-banner" style="display: none;"></div>
+        
+        <main id="newsContainer">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Fetching latest AI agent news...</p>
+            </div>
+        </main>
+    </div>
+    
+    <footer>
+        <p>Built with ❤️ by SamoTech | Data refreshes every 5 minutes | <a href="https://github.com/SamoTech/AgentScope" target="_blank">GitHub</a></p>
+    </footer>
+    
+    <script src="js/app.js"></script>
+</body>
+</html>
