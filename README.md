@@ -482,12 +482,12 @@ git push origin feature/add-new-ticker
 **If AgentScope saves you time or inspires your next project, consider supporting its development!**
 
 [![Sponsor on GitHub](https://img.shields.io/badge/💖_Sponsor-GitHub_Sponsors-ff69b4?style=for-the-badge&labelColor=1a1d2e)](https://github.com/sponsors/SamoTech)
-[![PayPal](https://img.shields.io/badge/PayPal-Donate-00457C?style=for-the-badge&logo=paypal&logoColor=white&labelColor=1a1d2e)](https://paypal.me/SamoTech)
+[![PayPal](https://img.shields.io/badge/PayPal-Donate-00457C?style=for-the-badge&logo=paypal&logoColor=white&labelColor=1a1d2e)](https://paypal.me/OnlinePayMe)
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy_Me_A_Coffee-Support-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black&labelColor=1a1d2e)](https://buymeacoffee.com/samotech)
 
 ### 🌟 **Your Support Enables:**
 
-✨ New features & enhancements  |  🐛 Bug fixes & maintenance  |  📚 Documentation improvements  |  🌐 Community support
+✨ New features & enhancements  |  🐛 Bug fixes & maintenance  |  📚 Documentation improvements  |  🌐 Community support
 
 </div>
 
