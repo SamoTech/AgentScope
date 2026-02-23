@@ -3,44 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🤖 AgentScope - Live AI Agent News Dashboard</title>
+    <title>🤖 AgentScope - AI Agents Intelligence Center</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
 </head>
 <body>
-    <header>
-        <h1>🤖 AgentScope</h1>
-        <p class="subtitle">Live AI Agent News Dashboard</p>
-        <div id="status">
-            <span id="lastUpdate">Loading news...</span>
-            <span id="articleCount"></span>
-            <span id="liveIndicator" class="live-dot">● LIVE</span>
+    <header class="top-bar">
+        <div class="top-bar-left">
+            <h1>🤖 AgentScope</h1>
+            <p class="subtitle">AI Agents • AI Market • Live Intelligence Dashboard</p>
+        </div>
+        <div class="top-bar-right">
+            <div class="kpi">
+                <span class="kpi-label">Last Sync</span>
+                <span id="lastUpdate" class="kpi-value">–</span>
+            </div>
+            <div class="kpi">
+                <span class="kpi-label">AI Stocks</span>
+                <span id="stockCount" class="kpi-value">0</span>
+            </div>
+            <div class="kpi">
+                <span class="kpi-label">News Articles</span>
+                <span id="articleCount" class="kpi-value">0</span>
+            </div>
+            <span id="liveIndicator" class="live-pill">● LIVE</span>
         </div>
     </header>
-    
-    <div class="container">
-        <div class="filters">
-            <input type="text" id="searchInput" placeholder="🔍 Search articles..." aria-label="Search articles">
-            <select id="sourceFilter" aria-label="Filter by source">
-                <option value="all">All Sources</option>
-            </select>
-            <button id="refreshBtn" title="Refresh news">🔄 Refresh</button>
-        </div>
-        
-        <div id="errorMessage" class="error-banner" style="display: none;"></div>
-        
-        <main id="newsContainer">
-            <div class="loading">
-                <div class="spinner"></div>
-                <p>Fetching latest AI agent news...</p>
+
+    <main class="layout">
+        <!-- AI Market Panel -->
+        <section class="panel panel-market">
+            <header class="panel-header">
+                <div>
+                    <h2>AI Market Overview</h2>
+                    <p class="panel-subtitle">Key AI & agent infrastructure stocks</p>
+                </div>
+                <div class="panel-controls">
+                    <select id="segmentFilter" aria-label="Filter AI stocks by segment">
+                        <option value="all">All Segments</option>
+                    </select>
+                    <button id="refreshBtn" class="btn" title="Refresh all data">🔄 Refresh</button>
+                </div>
+            </header>
+
+            <div id="stocksContainer" class="stocks-grid">
+                <div class="placeholder">Loading AI market data...</div>
             </div>
-        </main>
-    </div>
-    
-    <footer>
-        <p>Built with ❤️ by SamoTech | Data refreshes every 5 minutes | <a href="https://github.com/SamoTech/AgentScope" target="_blank">GitHub</a></p>
+        </section>
+
+        <!-- AI News Panel -->
+        <section class="panel panel-news">
+            <header class="panel-header">
+                <div>
+                    <h2>AI Agents News Feed</h2>
+                    <p class="panel-subtitle">Live updates on AI agents, automation and multi‑agent systems</p>
+                </div>
+                <div class="panel-controls panel-controls-news">
+                    <input type="text" id="searchInput" placeholder="Search AI agent news..." aria-label="Search articles">
+                    <select id="sourceFilter" aria-label="Filter by source">
+                        <option value="all">All Sources</option>
+                    </select>
+                </div>
+            </header>
+
+            <div id="errorMessage" class="error-banner" style="display:none"></div>
+
+            <div id="newsContainer" class="news-grid">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Fetching latest AI agent news...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-left">
+            <span>Built with ❤️ by SamoTech</span>
+            <span>• Data refreshes every 5 minutes</span>
+        </div>
+        <div class="footer-right">
+            <span>Data sources: Hacker News, RSS, News APIs, Stock APIs</span>
+            <a href="https://github.com/SamoTech/AgentScope" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
     </footer>
-    
+
     <script src="js/app.js"></script>
 </body>
 </html>
