@@ -9,15 +9,16 @@ AgentScope is a lightweight, production-ready **AI intelligence dashboard** that
 
 It is designed as a **reference implementation** for dashboards that monitor agentic AI ecosystems (frameworks, infra, products) without any backend services.
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/[your-site-id]/deploy-status)](https://agentscope.netlify.app)
-[![GitHub license](https://img.shields.io/github/license/SamoTech/AgentScope?color=%236b46c1)](LICENSE)
-[![GitHub commits](https://img.shields.io/github/commits/main/SamoTech/AgentScope/main?color=%236b46c1)](https://github.com/SamoTech/AgentScope/commits/main)
-[![GitHub issues](https://img.shields.io/github/issues/SamoTech/AgentScope?color=%23ff6b6b)](https://github.com/SamoTech/AgentScope/issues)
-[![Sponsor](https://img.shields.io/static/v1?label=Sponsor&message=💖&color=%23ff69b4)](https://github.com/sponsors/SamoTech)
+[![Live Dashboard](https://img.shields.io/badge/Live-Dashboard-00e0ff?style=for-the-badge&logo=netlify&logoColor=white)](https://agentscope.netlify.app)
+[![License: MIT](https://img.shields.io/badge/License-MIT-6b46c1?style=for-the-badge)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/SamoTech/AgentScope?style=for-the-badge&color=ffd166)](https://github.com/SamoTech/AgentScope/stargazers)
+[![Sponsor](https://img.shields.io/badge/Sponsor-💖-ff69b4?style=for-the-badge)](https://github.com/sponsors/SamoTech)
+
+---
 
 ## 🎯 Live Dashboard
 
-**https://agentscope.netlify.app**
+**🚀 https://agentscope.netlify.app**
 
 - Best viewed on desktop, fully responsive on mobile.
 - Auto-refreshes every 5 minutes for both market and news data.
@@ -273,7 +274,7 @@ AgentScope is intentionally kept **simple and hackable**.
 
 If you find AgentScope useful, consider supporting ongoing development:
 
-- **GitHub Sponsors:** https://github.com/sponsors/SamoTech
+- **GitHub Sponsors:** [github.com/sponsors/SamoTech](https://github.com/sponsors/SamoTech)
 - **PayPal:** samo.hossam@gmail.com
 
 ---
