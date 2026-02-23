@@ -3,11 +3,26 @@ const CONFIG = {
     refreshInterval: 300000, // 5 minutes
 };
 
+// AI Stocks configuration
+const AI_STOCKS = [
+    { symbol: 'NVDA', name: 'NVIDIA', segment: 'GPU / Infrastructure' },
+    { symbol: 'AMD',  name: 'AMD',    segment: 'GPU / CPUs' },
+    { symbol: 'MSFT', name: 'Microsoft', segment: 'Cloud / Copilot' },
+    { symbol: 'GOOGL',name: 'Alphabet',  segment: 'Cloud / DeepMind' },
+    { symbol: 'META', name: 'Meta',      segment: 'AI Infra / LLaMA' },
+    { symbol: 'AVGO', name: 'Broadcom',  segment: 'AI Networking' },
+    { symbol: 'ARM',  name: 'Arm Holdings', segment: 'AI Chips / IP' }
+];
+
 let allArticles = [];
 let autoRefreshTimer = null;
+let aiStocks = [];
 
 async function init() {
-    await fetchAllNews();
+    await Promise.all([
+        fetchAllNews(),
+        fetchAIStocks()
+    ]);
     setupEventListeners();
     startAutoRefresh();
 }
@@ -101,6 +116,93 @@ async function fetchFromRSS(articles) {
             console.error(`Error fetching from ${source.name}:`, error);
         }
     }
+}
+
+async function fetchAIStocks() {
+    const container = document.getElementById('stocksContainer');
+    if (!container) return;
+
+    try {
+        const API_KEY = window.FMP_API_KEY || 'DEMO_KEY_HERE'; // replace in Netlify env
+        const symbols = AI_STOCKS.map(s => s.symbol).join(',');
+        const url = `https://financialmodelingprep.com/stable/stock-price-change?symbol=${symbols}&apikey=${API_KEY}`;
+
+        container.innerHTML = '<div class="placeholder">Loading AI market data...</div>';
+
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (!Array.isArray(data)) {
+            console.error('Unexpected stocks response:', data);
+            container.innerHTML = '<div class="placeholder">Unable to load AI market data.</div>';
+            return;
+        }
+
+        aiStocks = data.map(item => {
+            const meta = AI_STOCKS.find(s => s.symbol === item.symbol) || {};
+            return {
+                symbol: item.symbol,
+                name: meta.name || item.symbol,
+                segment: meta.segment || 'AI',
+                price: item.price ?? item.changes || 0,
+                change: item.change,
+                changePercent: item.changesPercentage,
+            };
+        });
+
+        renderStocks(aiStocks);
+        populateSegmentFilter();
+        updateStockKPI();
+    } catch (error) {
+        console.error('Error fetching AI stocks:', error);
+        const container = document.getElementById('stocksContainer');
+        if (container) container.innerHTML = '<div class="placeholder">Unable to load AI market data.</div>';
+    }
+}
+
+function renderStocks(stocks) {
+    const container = document.getElementById('stocksContainer');
+    if (!container) return;
+
+    if (!stocks.length) {
+        container.innerHTML = '<div class="placeholder">No AI stock data available.</div>';
+        return;
+    }
+
+    container.innerHTML = stocks.map(stock => {
+        const change = Number(stock.changePercent || 0);
+        const trendClass = change > 0 ? 'stock-up' : change < 0 ? 'stock-down' : 'stock-flat';
+        const sign = change > 0 ? '+' : '';
+
+        return `
+        <div class="stock-card ${trendClass}">
+            <div class="stock-header">
+                <span class="stock-symbol">${stock.symbol}</span>
+                <span class="stock-name">${escapeHtml(stock.name)}</span>
+            </div>
+            <div class="stock-body">
+                <span class="stock-price">$${Number(stock.price || 0).toFixed(2)}</span>
+                <span class="stock-change">${sign}${change.toFixed(2)}%</span>
+            </div>
+            <div class="stock-footer">
+                <span class="stock-segment">${escapeHtml(stock.segment)}</span>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function populateSegmentFilter() {
+    const select = document.getElementById('segmentFilter');
+    if (!select) return;
+
+    const segments = [...new Set(AI_STOCKS.map(s => s.segment))].sort();
+    select.innerHTML = '<option value="all">All Segments</option>' +
+        segments.map(seg => `<option value="${escapeHtml(seg)}">${escapeHtml(seg)}</option>`).join('');
+}
+
+function updateStockKPI() {
+    const el = document.getElementById('stockCount');
+    if (el) el.textContent = aiStocks.length.toString();
 }
 
 function isAIAgentRelated(text) {
@@ -242,31 +344,55 @@ function displayDemoArticles() {
 }
 
 function setupEventListeners() {
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase();
-        const filtered = allArticles.filter(a =>
-            a.title.toLowerCase().includes(query) ||
-            (a.description && a.description.toLowerCase().includes(query))
-        );
-        displayArticles(filtered);
-    });
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const filtered = allArticles.filter(a =>
+                a.title.toLowerCase().includes(query) ||
+                (a.description && a.description.toLowerCase().includes(query))
+            );
+            displayArticles(filtered);
+        });
+    }
 
-    document.getElementById('sourceFilter').addEventListener('change', (e) => {
-        const source = e.target.value;
-        const filtered = source === 'all'
-            ? allArticles
-            : allArticles.filter(a => a.source === source);
-        displayArticles(filtered);
-    });
+    const sourceFilter = document.getElementById('sourceFilter');
+    if (sourceFilter) {
+        sourceFilter.addEventListener('change', (e) => {
+            const source = e.target.value;
+            const filtered = source === 'all'
+                ? allArticles
+                : allArticles.filter(a => a.source === source);
+            displayArticles(filtered);
+        });
+    }
 
-    document.getElementById('refreshBtn').addEventListener('click', () => {
-        fetchAllNews();
-    });
+    const refreshBtn = document.getElementById('refreshBtn');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', () => {
+            fetchAllNews();
+            fetchAIStocks();
+        });
+    }
+
+    const segmentFilter = document.getElementById('segmentFilter');
+    if (segmentFilter) {
+        segmentFilter.addEventListener('change', (e) => {
+            const segment = e.target.value;
+            const filtered = segment === 'all'
+                ? aiStocks
+                : aiStocks.filter(s => s.segment === segment);
+            renderStocks(filtered);
+        });
+    }
 }
 
 function startAutoRefresh() {
     if (autoRefreshTimer) clearInterval(autoRefreshTimer);
-    autoRefreshTimer = setInterval(fetchAllNews, CONFIG.refreshInterval);
+    autoRefreshTimer = setInterval(() => {
+        fetchAllNews();
+        fetchAIStocks();
+    }, CONFIG.refreshInterval);
 }
 
 document.addEventListener('DOMContentLoaded', init);
