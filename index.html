@@ -1,93 +1,1020 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🤖 AgentScope - AI Agents Intelligence Center</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🤖 AgentScope — AI Intelligence Terminal</title>
+  <meta name="description" content="Real-time AI agents intelligence: market data, live news, sentiment analysis" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── CSS Custom Properties ──────────────────────────── */
+    :root {
+      --bg-0: #080c12;
+      --bg-1: #0d1320;
+      --bg-2: #121a2e;
+      --bg-3: #1a2540;
+      --border: rgba(0, 224, 255, 0.12);
+      --border-hover: rgba(0, 224, 255, 0.35);
+      --accent: #00e0ff;
+      --accent-dim: rgba(0, 224, 255, 0.18);
+      --accent-glow: 0 0 18px rgba(0, 224, 255, 0.22);
+      --green: #00e57a;
+      --green-dim: rgba(0, 229, 122, 0.14);
+      --red: #ff4b6e;
+      --red-dim: rgba(255, 75, 110, 0.14);
+      --yellow: #ffd166;
+      --yellow-dim: rgba(255, 209, 102, 0.14);
+      --text-primary: #e8f0fe;
+      --text-secondary: rgba(232, 240, 254, 0.55);
+      --text-muted: rgba(232, 240, 254, 0.3);
+      --font-mono: "IBM Plex Mono", monospace;
+      --font-display: "Syne", sans-serif;
+      --radius: 6px;
+      --radius-lg: 12px;
+      --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="light"] {
+      --bg-0: #f0f4ff;
+      --bg-1: #e8edf8;
+      --bg-2: #dde3f0;
+      --bg-3: #cfd6ea;
+      --border: rgba(0, 100, 180, 0.14);
+      --border-hover: rgba(0, 100, 180, 0.35);
+      --accent: #0070cc;
+      --accent-dim: rgba(0, 112, 204, 0.12);
+      --accent-glow: 0 0 18px rgba(0, 112, 204, 0.18);
+      --green: #00894a;
+      --green-dim: rgba(0, 137, 74, 0.1);
+      --red: #cc2245;
+      --red-dim: rgba(204, 34, 69, 0.1);
+      --yellow: #cc8800;
+      --yellow-dim: rgba(204, 136, 0, 0.1);
+      --text-primary: #1a2540;
+      --text-secondary: rgba(26, 37, 64, 0.65);
+      --text-muted: rgba(26, 37, 64, 0.38);
+    }
+
+    /* ─── Base Reset ─────────────────────────────────────── */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font-mono);
+      background: var(--bg-0);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-image:
+        radial-gradient(circle at 25% 15%, rgba(0, 224, 255, 0.04) 0%, transparent 55%),
+        repeating-linear-gradient(
+          0deg, transparent, transparent 2px,
+          rgba(0, 224, 255, 0.01) 2px, rgba(0, 224, 255, 0.01) 4px
+        );
+    }
+
+    /* ─── Nav & Header ───────────────────────────────────── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 2rem;
+      background: var(--bg-1);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -0.03em;
+    }
+    .nav-actions {
+      display: flex;
+      gap: 0.8rem;
+    }
+    .nav-btn {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 0.65rem 1.2rem;
+      border-radius: var(--radius);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+    .nav-btn:hover {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+      box-shadow: var(--accent-glow);
+    }
+    .live-badge {
+      color: var(--green);
+      font-weight: 500;
+    }
+
+    /* ─── KPI Bar ────────────────────────────────────────── */
+    .kpi-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      padding: 1.2rem 2rem;
+      background: var(--bg-1);
+      border-bottom: 1px solid var(--border);
+    }
+    .kpi-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .kpi-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      font-weight: 500;
+    }
+    .kpi-value {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .kpi-value.up { color: var(--green); }
+    .kpi-value.down { color: var(--red); }
+
+    /* ─── Main Layout ────────────────────────────────────── */
+    .layout {
+      flex: 1;
+      padding: 2rem;
+      max-width: 1800px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* ─── Panel (shared) ─────────────────────────────────── */
+    .panel {
+      background: var(--bg-1);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--border);
+    }
+    .panel-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .panel-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+    .panel-controls {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .panel-body {
+      padding: 1.8rem 2rem;
+    }
+
+    /* ─── Filter Row ─────────────────────────────────────── */
+    .filter-row {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      padding: 1rem 2rem;
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--border);
+    }
+    .filter-chip {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.45rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .filter-chip:hover,
+    .filter-chip.active {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ─── Stock Grid ─────────────────────────────────────── */
+    .stock-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+    }
+    .stock-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--card-accent, var(--accent));
+      border-radius: var(--radius);
+      padding: 1.2rem;
+      transition: all var(--transition);
+      opacity: 0;
+      animation: fadeIn 0.4s forwards;
+    }
+    @keyframes fadeIn { to { opacity: 1; } }
+    .stock-card:nth-child(1) { animation-delay: 0.05s; }
+    .stock-card:nth-child(2) { animation-delay: 0.1s; }
+    .stock-card:nth-child(3) { animation-delay: 0.15s; }
+    .stock-card:nth-child(4) { animation-delay: 0.2s; }
+    .stock-card:nth-child(5) { animation-delay: 0.25s; }
+    .stock-card:nth-child(6) { animation-delay: 0.3s; }
+    .stock-card:nth-child(7) { animation-delay: 0.35s; }
+    .stock-card:nth-child(8) { animation-delay: 0.4s; }
+    .stock-card:nth-child(9) { animation-delay: 0.45s; }
+    .stock-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+    .stock-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.8rem;
+    }
+    .stock-ticker {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .stock-name {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .stock-segment {
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 12px;
+      background: var(--accent-dim);
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .stock-price {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+    .stock-change {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .stock-change.up { color: var(--green); }
+    .stock-change.down { color: var(--red); }
+    .sparkline-canvas {
+      width: 100%;
+      height: 40px;
+      margin-top: 0.8rem;
+    }
+
+    /* ─── News Grid ──────────────────────────────────────── */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.2rem;
+    }
+    .news-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.3rem;
+      transition: all var(--transition);
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      opacity: 0;
+      animation: fadeIn 0.4s forwards;
+    }
+    .news-card:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+      border-color: var(--border-hover);
+    }
+    .news-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .news-source {
+      padding: 0.2rem 0.6rem;
+      border-radius: 10px;
+      background: var(--accent-dim);
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .news-title {
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--text-primary);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .news-title a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .news-title a:hover { color: var(--accent); }
+    .news-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .news-footer {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .sentiment-badge,
+    .category-badge {
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 10px;
+      font-weight: 500;
+    }
+    .sentiment-badge.bullish {
+      background: var(--green-dim);
+      color: var(--green);
+    }
+    .sentiment-badge.bearish {
+      background: var(--red-dim);
+      color: var(--red);
+    }
+    .sentiment-badge.neutral {
+      background: var(--yellow-dim);
+      color: var(--yellow);
+    }
+    .category-badge {
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+    .read-time {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+
+    /* ─── Loading & Skeletons ────────────────────────────── */
+    .skeleton-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+    }
+    .skeleton-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.2rem;
+      height: 180px;
+      position: relative;
+      overflow: hidden;
+    }
+    .skeleton-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 224, 255, 0.08),
+        transparent
+      );
+      animation: shimmer 1.8s infinite;
+    }
+    @keyframes shimmer { to { left: 100%; } }
+    .skeleton-line {
+      background: var(--bg-3);
+      height: 12px;
+      border-radius: 4px;
+      margin-bottom: 0.8rem;
+    }
+    .skeleton-line.short { width: 60%; }
+    .skeleton-line.long { width: 100%; }
+
+    /* ─── Inputs ──────────────────────────────────────────── */
+    input[type="text"],
+    select {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 0.65rem 1rem;
+      border-radius: var(--radius);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      transition: all var(--transition);
+    }
+    input[type="text"]:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: var(--accent-glow);
+    }
+    input[type="text"]::placeholder { color: var(--text-muted); }
+
+    /* ─── Footer ──────────────────────────────────────────── */
+    footer {
+      padding: 1.5rem 2rem;
+      background: var(--bg-1);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    footer a:hover { color: var(--text-primary); }
+
+    /* ─── Responsive ──────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav { flex-direction: column; gap: 1rem; }
+      .kpi-bar { grid-template-columns: repeat(2, 1fr); }
+      .layout { padding: 1rem; }
+      .panel-header { flex-direction: column; gap: 1rem; align-items: flex-start; }
+      .stock-grid,
+      .news-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-    <header class="top-bar">
-        <div class="top-bar-left">
-            <h1>🤖 AgentScope</h1>
-            <p class="subtitle">AI Agents • AI Market • Live Intelligence Dashboard</p>
+  <!-- ────────────────────────────────────────────────────────── -->
+  <!-- Nav Bar                                                   -->
+  <!-- ────────────────────────────────────────────────────────── -->
+  <nav class="nav">
+    <h1 class="nav-title">🤖 AgentScope</h1>
+    <div class="nav-actions">
+      <span class="live-badge">● LIVE</span>
+      <button class="nav-btn" id="refreshBtn" title="Manual refresh (R)">⟳ Refresh</button>
+      <button class="nav-btn" id="themeBtn" title="Toggle theme (T)">◐ Theme</button>
+    </div>
+  </nav>
+
+  <!-- ────────────────────────────────────────────────────────── -->
+  <!-- KPI Bar                                                   -->
+  <!-- ────────────────────────────────────────────────────────── -->
+  <div class="kpi-bar">
+    <div class="kpi-item">
+      <span class="kpi-label">Last Sync</span>
+      <span class="kpi-value" id="lastSync">—</span>
+    </div>
+    <div class="kpi-item">
+      <span class="kpi-label">AI Stocks</span>
+      <span class="kpi-value" id="stockCount">0</span>
+    </div>
+    <div class="kpi-item">
+      <span class="kpi-label">🗞️ Articles</span>
+      <span class="kpi-value" id="articleCount">0</span>
+    </div>
+    <div class="kpi-item">
+      <span class="kpi-label">Top Mover</span>
+      <span class="kpi-value" id="topMover">—</span>
+    </div>
+    <div class="kpi-item">
+      <span class="kpi-label">Next Refresh</span>
+      <span class="kpi-value" id="countdown">5:00</span>
+    </div>
+  </div>
+
+  <!-- ────────────────────────────────────────────────────────── -->
+  <!-- Main Layout                                               -->
+  <!-- ────────────────────────────────────────────────────────── -->
+  <main class="layout">
+    <!-- ╔═══════════════════════════════════════════════════════╗ -->
+    <!-- ║ AI Market Panel                                       ║ -->
+    <!-- ╚═══════════════════════════════════════════════════════╝ -->
+    <section class="panel">
+      <header class="panel-header">
+        <div>
+          <h2 class="panel-title">AI Market Overview</h2>
+          <p class="panel-subtitle">LOADING</p>
         </div>
-        <div class="top-bar-right">
-            <div class="kpi">
-                <span class="kpi-label">Last Sync</span>
-                <span id="lastUpdate" class="kpi-value">–</span>
-            </div>
-            <div class="kpi">
-                <span class="kpi-label">AI Stocks</span>
-                <span id="stockCount" class="kpi-value">0</span>
-            </div>
-            <div class="kpi">
-                <span class="kpi-label">News Articles</span>
-                <span id="articleCount" class="kpi-value">0</span>
-            </div>
-            <span id="liveIndicator" class="live-pill">● LIVE</span>
+        <div class="panel-controls">
+          <select id="segmentFilter">
+            <option value="all">All Segments</option>
+            <option value="🖥 GPU/Infra">🖥 GPU/Infra</option>
+            <option value="☁️ Cloud">☁️ Cloud</option>
+            <option value="🤖 Agents">🤖 Agents</option>
+            <option value="🔗 Networking">🔗 Networking</option>
+            <option value="💡 Chips/IP">💡 Chips/IP</option>
+            <option value="📊 Data/AI">📊 Data/AI</option>
+          </select>
         </div>
-    </header>
+      </header>
+      <div class="panel-body">
+        <div class="stock-grid" id="stockGrid"></div>
+      </div>
+    </section>
 
-    <main class="layout">
-        <!-- AI Market Panel -->
-        <section class="panel panel-market">
-            <header class="panel-header">
-                <div>
-                    <h2>AI Market Overview</h2>
-                    <p class="panel-subtitle">Key AI & agent infrastructure stocks</p>
-                </div>
-                <div class="panel-controls">
-                    <select id="segmentFilter" aria-label="Filter AI stocks by segment">
-                        <option value="all">All Segments</option>
-                    </select>
-                    <button id="refreshBtn" class="btn" title="Refresh all data">🔄 Refresh</button>
-                </div>
-            </header>
-
-            <div id="stocksContainer" class="stocks-grid">
-                <div class="placeholder">Loading AI market data...</div>
-            </div>
-        </section>
-
-        <!-- AI News Panel -->
-        <section class="panel panel-news">
-            <header class="panel-header">
-                <div>
-                    <h2>AI Agents News Feed</h2>
-                    <p class="panel-subtitle">Live updates on AI agents, automation and multi‑agent systems</p>
-                </div>
-                <div class="panel-controls panel-controls-news">
-                    <input type="text" id="searchInput" placeholder="Search AI agent news..." aria-label="Search articles">
-                    <select id="sourceFilter" aria-label="Filter by source">
-                        <option value="all">All Sources</option>
-                    </select>
-                </div>
-            </header>
-
-            <div id="errorMessage" class="error-banner" style="display:none"></div>
-
-            <div id="newsContainer" class="news-grid">
-                <div class="loading">
-                    <div class="spinner"></div>
-                    <p>Fetching latest AI agent news...</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="footer-left">
-            <span>Built with ❤️ by SamoTech</span>
-            <span>• Data refreshes every 5 minutes</span>
+    <!-- ╔═══════════════════════════════════════════════════════╗ -->
+    <!-- ║ AI News Panel                                         ║ -->
+    <!-- ╚═══════════════════════════════════════════════════════╝ -->
+    <section class="panel">
+      <header class="panel-header">
+        <div>
+          <h2 class="panel-title">AI Agents News Feed</h2>
+          <p class="panel-subtitle">LOADING</p>
         </div>
-        <div class="footer-right">
-            <span>Data sources: Hacker News, RSS, News APIs, Stock APIs</span>
-            <a href="https://github.com/SamoTech/AgentScope" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <div class="panel-controls">
+          <input type="text" id="searchInput" placeholder="🔍 Search..." />
+          <select id="sourceFilter">
+            <option value="all">All Sources</option>
+            <option value="HN">HN</option>
+            <option value="TechCrunch">TechCrunch</option>
+            <option value="VentureBeat">VentureBeat</option>
+            <option value="AI News">AI News</option>
+          </select>
         </div>
-    </footer>
+      </header>
+      <div class="filter-row" id="categoryFilters"></div>
+      <div class="panel-body">
+        <div class="news-grid" id="newsGrid"></div>
+      </div>
+    </section>
+  </main>
 
-    <script src="js/app.js"></script>
+  <!-- ────────────────────────────────────────────────────────── -->
+  <!-- Footer                                                    -->
+  <!-- ────────────────────────────────────────────────────────── -->
+  <footer>
+    Made with ❤️ by <a href="https://github.com/SamoTech" target="_blank" rel="noopener">SamoTech</a>
+    &nbsp;•&nbsp;
+    <a href="https://github.com/SamoTech/AgentScope" target="_blank" rel="noopener">GitHub</a>
+  </footer>
+
+  <script>
+  (() => {
+    'use strict';
+
+    /* ────────────────────────────────────────────────────────── *
+     *  CONFIG
+     * ────────────────────────────────────────────────────────── */
+    const FMP_KEY = window.FMP_API_KEY || 'demo';
+    const STOCKS = [
+      { ticker: 'NVDA', name: 'NVIDIA', segment: '🖥 GPU/Infra' },
+      { ticker: 'AMD',  name: 'AMD',    segment: '🖥 GPU/Infra' },
+      { ticker: 'MSFT', name: 'Microsoft', segment: '☁️ Cloud' },
+      { ticker: 'GOOGL', name: 'Alphabet', segment: '☁️ Cloud' },
+      { ticker: 'META', name: 'Meta',      segment: '🤖 Agents' },
+      { ticker: 'AVGO', name: 'Broadcom',  segment: '🔗 Networking' },
+      { ticker: 'ARM',  name: 'Arm Holdings', segment: '💡 Chips/IP' },
+      { ticker: 'PLTR', name: 'Palantir',  segment: '📊 Data/AI' },
+      { ticker: 'ORCL', name: 'Oracle',    segment: '☁️ Cloud' },
+    ];
+    const NEWS_SOURCES = [
+      { id: 'tc', name: 'TechCrunch', url: 'https://techcrunch.com/category/artificial-intelligence/feed/' },
+      { id: 'vb', name: 'VentureBeat', url: 'https://venturebeat.com/category/ai/feed/' },
+      { id: 'ai', name: 'AI News', url: 'https://artificialintelligence-news.com/feed/' },
+    ];
+    const REFRESH_MS = 300000; // 5 min
+
+    /* ────────────────────────────────────────────────────────── *
+     *  STATE
+     * ────────────────────────────────────────────────────────── */
+    const state = {
+      stocks: [],
+      news: [],
+      filteredNews: [],
+      selectedSegment: 'all',
+      selectedSource: 'all',
+      selectedCategory: 'all',
+      searchQuery: '',
+      countdownSeconds: 300,
+    };
+
+    /* ────────────────────────────────────────────────────────── *
+     *  UTIL
+     * ────────────────────────────────────────────────────────── */
+    const timeAgo = date => {
+      const s = Math.floor((Date.now() - new Date(date)) / 1000);
+      if (s < 60) return `${s}s ago`;
+      const m = Math.floor(s / 60);
+      if (m < 60) return `${m}m ago`;
+      const h = Math.floor(m / 60);
+      if (h < 24) return `${h}h ago`;
+      return `${Math.floor(h / 24)}d ago`;
+    };
+    const readTime = text => {
+      const words = (text || '').split(/\s+/).length;
+      const mins = Math.ceil(words / 200);
+      return `${mins} min read`;
+    };
+    const fmtPrice = p => `$${Number(p || 0).toFixed(2)}`;
+    const fmtChange = c => {
+      const n = Number(c || 0);
+      return (n > 0 ? '+' : '') + n.toFixed(2) + '%';
+    };
+
+    /* ────────────────────────────────────────────────────────── *
+     *  SENTIMENT (keyword-based)
+     * ────────────────────────────────────────────────────────── */
+    const getSentiment = text => {
+      const t = (text || '').toLowerCase();
+      const bullish = ['launch','raise','fund','billion','growth','record','partner','breakthrough','accelerate','expand','surge','soar'];
+      const bearish = ['layoff','cut','drop','fall','warn','miss','concern','risk','regulate','ban','fine','breach','fail','plunge','slash'];
+      const bScore = bullish.filter(w => t.includes(w)).length;
+      const bearScore = bearish.filter(w => t.includes(w)).length;
+      if (bScore > bearScore) return 'bullish';
+      if (bearScore > bScore) return 'bearish';
+      return 'neutral';
+    };
+
+    /* ────────────────────────────────────────────────────────── *
+     *  CATEGORY (keyword-based)
+     * ────────────────────────────────────────────────────────── */
+    const getCategory = text => {
+      const t = (text || '').toLowerCase();
+      if (/(\bagent\b|automat|workflow|orchestrat|autonomous)/i.test(t)) return 'Agents';
+      if (/(paper|study|model|benchmark|arxiv|research)/i.test(t)) return 'Research';
+      if (/(cloud|gpu|chip|hardware|data center|inference|infra)/i.test(t)) return 'Infra';
+      if (/(raise|series|invest|acquire|million|billion|fund)/i.test(t)) return 'Funding';
+      return null;
+    };
+
+    /* ────────────────────────────────────────────────────────── *
+     *  SPARKLINES (canvas)
+     * ────────────────────────────────────────────────────────── */
+    const genSparkData = (price, changePercent, points = 20) => {
+      const arr = [];
+      const drift = (changePercent / 100) * price;
+      let val = price - drift;
+      for (let i = 0; i < points; i++) {
+        arr.push(val);
+        val += (drift / points) + (Math.random() - 0.5) * (price * 0.01);
+      }
+      return arr;
+    };
+    const drawSparkline = (canvas, data, color) => {
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+      ctx.clearRect(0, 0, w, h);
+      if (!data || data.length < 2) return;
+      const min = Math.min(...data);
+      const max = Math.max(...data);
+      const range = max - min || 1;
+      const stepX = w / (data.length - 1);
+      ctx.beginPath();
+      data.forEach((v, i) => {
+        const x = i * stepX;
+        const y = h - ((v - min) / range) * h;
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      });
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      // gradient fill
+      ctx.lineTo(w, h);
+      ctx.lineTo(0, h);
+      ctx.closePath();
+      const grad = ctx.createLinearGradient(0, 0, 0, h);
+      grad.addColorStop(0, color + '40');
+      grad.addColorStop(1, color + '00');
+      ctx.fillStyle = grad;
+      ctx.fill();
+    };
+
+    /* ────────────────────────────────────────────────────────── *
+     *  STOCKS
+     * ────────────────────────────────────────────────────────── */
+    const fetchStocks = async () => {
+      try {
+        const tickers = STOCKS.map(s => s.ticker).join(',');
+        const url = `https://financialmodelingprep.com/stable/stock-price-change?symbol=${tickers}&apikey=${FMP_KEY}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        if (!Array.isArray(data)) throw new Error('Invalid response');
+        state.stocks = data.map(d => {
+          const meta = STOCKS.find(s => s.ticker === d.symbol) || {};
+          return {
+            ticker: d.symbol,
+            name: meta.name || d.symbol,
+            segment: meta.segment || '—',
+            price: d.price || 0,
+            change: d.changesPercentage || 0,
+          };
+        });
+      } catch (e) {
+        console.warn('FMP failed, using mock data', e);
+        state.stocks = STOCKS.map(s => ({
+          ticker: s.ticker,
+          name: s.name,
+          segment: s.segment,
+          price: 100 + Math.random() * 300,
+          change: (Math.random() - 0.5) * 10,
+        }));
+      }
+      renderStocks();
+    };
+
+    const renderStocks = () => {
+      const filtered = state.selectedSegment === 'all'
+        ? state.stocks
+        : state.stocks.filter(s => s.segment === state.selectedSegment);
+      const grid = document.getElementById('stockGrid');
+      if (!filtered.length) {
+        grid.innerHTML = '<p style="color:var(--text-muted)">No stocks match filter</p>';
+        return;
+      }
+      grid.innerHTML = filtered.map(s => {
+        const color = s.change > 0 ? 'var(--green)' : s.change < 0 ? 'var(--red)' : 'var(--accent)';
+        const cardAccent = s.change > 0 ? 'var(--green)' : s.change < 0 ? 'var(--red)' : 'var(--accent)';
+        return `
+          <div class="stock-card" style="--card-accent:${cardAccent}">
+            <div class="stock-header">
+              <div>
+                <div class="stock-ticker">${s.ticker}</div>
+                <div class="stock-name">${s.name}</div>
+              </div>
+              <div class="stock-segment">${s.segment}</div>
+            </div>
+            <div class="stock-price">${fmtPrice(s.price)}</div>
+            <div class="stock-change ${s.change >= 0 ? 'up' : 'down'}">${fmtChange(s.change)}</div>
+            <canvas class="sparkline-canvas" id="spark-${s.ticker}" width="280" height="40"></canvas>
+          </div>
+        `;
+      }).join('');
+      // draw sparklines
+      filtered.forEach(s => {
+        const canvas = document.getElementById(`spark-${s.ticker}`);
+        if (!canvas) return;
+        const data = genSparkData(s.price, s.change);
+        const color = s.change > 0 ? 'var(--green)' : s.change < 0 ? 'var(--red)' : 'var(--accent)';
+        const colorVal = getComputedStyle(document.documentElement).getPropertyValue(color.replace('var(','').replace(')',''));
+        drawSparkline(canvas, data, colorVal);
+      });
+    };
+
+    /* ────────────────────────────────────────────────────────── *
+     *  NEWS
+     * ────────────────────────────────────────────────────────── */
+    const fetchNews = async () => {
+      const articles = [];
+      // HN
+      try {
+        const res = await fetch('https://hacker-news.firebaseio.com/v0/topstories.json');
+        const ids = await res.json();
+        const stories = await Promise.all(ids.slice(0, 50).map(id =>
+          fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then(r => r.json())
+        ));
+        stories.forEach(s => {
+          if (!s || !s.title) return;
+          const text = s.title + ' ' + (s.text || '');
+          if (!/(\bagent\b|ai|llm|automat|workflow)/i.test(text)) return;
+          articles.push({
+            title: s.title,
+            desc: s.text ? s.text.slice(0, 200) : 'Discussion on Hacker News',
+            url: s.url || `https://news.ycombinator.com/item?id=${s.id}`,
+            source: 'HN',
+            date: new Date(s.time * 1000).toISOString(),
+          });
+        });
+      } catch (e) { console.warn('HN fetch failed', e); }
+      // RSS
+      for (const src of NEWS_SOURCES) {
+        try {
+          const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(src.url)}`;
+          const res = await fetch(rssUrl);
+          const data = await res.json();
+          if (data.status !== 'ok' || !data.items) continue;
+          data.items.forEach(item => {
+            const text = (item.title || '') + ' ' + (item.description || '');
+            if (!/(\bagent\b|ai|llm|automat|workflow)/i.test(text)) return;
+            articles.push({
+              title: item.title,
+              desc: (item.description || '').replace(/<[^>]+>/g, '').slice(0, 200),
+              url: item.link,
+              source: src.name,
+              date: item.pubDate,
+            });
+          });
+        } catch (e) { console.warn(`${src.name} fetch failed`, e); }
+      }
+      // dedupe
+      const seen = new Set();
+      state.news = articles.filter(a => {
+        const key = a.title.slice(0, 50).toLowerCase();
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      }).sort((a, b) => new Date(b.date) - new Date(a.date));
+      // add metadata
+      state.news.forEach(a => {
+        a.sentiment = getSentiment(a.title + ' ' + a.desc);
+        a.category = getCategory(a.title + ' ' + a.desc);
+      });
+      filterAndRenderNews();
+    };
+
+    const filterAndRenderNews = () => {
+      let filtered = state.news;
+      if (state.selectedSource !== 'all') {
+        filtered = filtered.filter(a => a.source === state.selectedSource);
+      }
+      if (state.selectedCategory !== 'all') {
+        filtered = filtered.filter(a => a.category === state.selectedCategory);
+      }
+      if (state.searchQuery) {
+        const q = state.searchQuery.toLowerCase();
+        filtered = filtered.filter(a =>
+          a.title.toLowerCase().includes(q) || a.desc.toLowerCase().includes(q)
+        );
+      }
+      state.filteredNews = filtered;
+      renderNews();
+    };
+
+    const renderNews = () => {
+      const grid = document.getElementById('newsGrid');
+      if (!state.filteredNews.length) {
+        grid.innerHTML = '<p style="color:var(--text-muted)">No articles match filters</p>';
+        return;
+      }
+      grid.innerHTML = state.filteredNews.map(a => {
+        const sentIcon = { bullish: '📈', bearish: '📉', neutral: '➡' }[a.sentiment] || '—';
+        const catIcon = { Agents: '🤖', Research: '🔬', Infra: '⚙️', Funding: '💰' }[a.category] || '';
+        return `
+          <div class="news-card">
+            <div class="news-meta">
+              <span class="news-source">${a.source}</span>
+              <span>${timeAgo(a.date)}</span>
+            </div>
+            <h3 class="news-title">
+              <a href="${a.url}" target="_blank" rel="noopener">${a.title}</a>
+            </h3>
+            <p class="news-desc">${a.desc}...</p>
+            <div class="news-footer">
+              <span class="sentiment-badge ${a.sentiment}">${sentIcon} ${a.sentiment}</span>
+              ${a.category ? `<span class="category-badge">${catIcon} ${a.category}</span>` : ''}
+              <span class="read-time">${readTime(a.desc)}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    };
+
+    /* ────────────────────────────────────────────────────────── *
+     *  KPI
+     * ────────────────────────────────────────────────────────── */
+    const updateKPI = () => {
+      document.getElementById('lastSync').textContent = new Date().toLocaleTimeString();
+      document.getElementById('stockCount').textContent = state.stocks.length;
+      document.getElementById('articleCount').textContent = state.news.length;
+      if (state.stocks.length) {
+        const sorted = [...state.stocks].sort((a, b) => Math.abs(b.change) - Math.abs(a.change));
+        const top = sorted[0];
+        const el = document.getElementById('topMover');
+        el.textContent = `${top.ticker} ${fmtChange(top.change)}`;
+        el.className = 'kpi-value ' + (top.change >= 0 ? 'up' : 'down');
+      }
+    };
+
+    /* ────────────────────────────────────────────────────────── *
+     *  COUNTDOWN
+     * ────────────────────────────────────────────────────────── */
+    let countdownInterval;
+    const startCountdown = () => {
+      if (countdownInterval) clearInterval(countdownInterval);
+      state.countdownSeconds = 300;
+      countdownInterval = setInterval(() => {
+        state.countdownSeconds--;
+        if (state.countdownSeconds <= 0) {
+          state.countdownSeconds = 300;
+          refreshAll();
+        }
+        const m = Math.floor(state.countdownSeconds / 60);
+        const s = state.countdownSeconds % 60;
+        document.getElementById('countdown').textContent = `${m}:${s.toString().padStart(2, '0')}`;
+      }, 1000);
+    };
+
+    /* ────────────────────────────────────────────────────────── *
+     *  THEME
+     * ────────────────────────────────────────────────────────── */
+    const toggleTheme = () => {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('agentscope_theme', next);
+    };
+    const initTheme = () => {
+      const saved = localStorage.getItem('agentscope_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', saved);
+    };
+
+    /* ────────────────────────────────────────────────────────── *
+     *  REFRESH
+     * ────────────────────────────────────────────────────────── */
+    const refreshAll = async () => {
+      // show skeletons
+      document.getElementById('stockGrid').innerHTML = Array(9).fill('').map(() => `
+        <div class="skeleton-card">
+          <div class="skeleton-line short"></div>
+          <div class="skeleton-line long"></div>
+          <div class="skeleton-line long"></div>
+        </div>
+      `).join('');
+      document.getElementById('newsGrid').innerHTML = Array(6).fill('').map(() => `
+        <div class="skeleton-card">
+          <div class="skeleton-line short"></div>
+          <div class="skeleton-line long"></div>
+          <div class="skeleton-line long"></div>
+        </div>
+      `).join('');
+      await Promise.all([fetchStocks(), fetchNews()]);
+      updateKPI();
+      startCountdown();
+    };
+
+    /* ────────────────────────────────────────────────────────── *
+     *  EVENTS
+     * ────────────────────────────────────────────────────────── */
+    // segment filter
+    document.getElementById('segmentFilter').addEventListener('change', e => {
+      state.selectedSegment = e.target.value;
+      renderStocks();
+    });
+    // source filter
+    document.getElementById('sourceFilter').addEventListener('change', e => {
+      state.selectedSource = e.target.value;
+      filterAndRenderNews();
+    });
+    // category filter (build buttons)
+    const catFilterContainer = document.getElementById('categoryFilters');
+    ['all', 'Agents', 'Research', 'Infra', 'Funding'].forEach(cat => {
+      const btn = document.createElement('button');
+      btn.className = 'filter-chip' + (cat === 'all' ? ' active' : '');
+      const icons = { all: 'All Categories', Agents: '🤖 Agents', Research: '🔬 Research', Infra: '⚙️ Infra', Funding: '💰 Funding' };
+      btn.textContent = icons[cat] || cat;
+      btn.onclick = () => {
+        state.selectedCategory = cat;
+        document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        filterAndRenderNews();
+      };
+      catFilterContainer.appendChild(btn);
+    });
+    // search (debounce)
+    let searchTimeout;
+    document.getElementById('searchInput').addEventListener('input', e => {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        state.searchQuery = e.target.value;
+        filterAndRenderNews();
+      }, 280);
+    });
+    // buttons
+    document.getElementById('refreshBtn').addEventListener('click', () => refreshAll());
+    document.getElementById('themeBtn').addEventListener('click', () => toggleTheme());
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', e => {
+      if (e.target.tagName === 'INPUT') return;
+      if (e.key === 'r' || e.key === 'R') refreshAll();
+      if (e.key === 't' || e.key === 'T') toggleTheme();
+    });
+
+    /* ────────────────────────────────────────────────────────── *
+     *  INIT
+     * ────────────────────────────────────────────────────────── */
+    refreshAll();
+
+  })();
+  </script>
 </body>
 </html>
