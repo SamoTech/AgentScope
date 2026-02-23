@@ -19,7 +19,7 @@ async function fetchAllNews() {
     const articles = [];
 
     await fetchFromHackerNews(articles);
-    await fetchFromDemoRSS(articles);
+    await fetchFromRSS(articles);
 
     if (articles.length === 0) {
         showError('No articles found. Showing demo data.');
@@ -38,7 +38,7 @@ async function fetchFromHackerNews(articles) {
         const storyIds = await response.json();
 
         const stories = await Promise.all(
-            storyIds.slice(0, 30).map(id =>
+            storyIds.slice(0, 50).map(id =>
                 fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then(r => r.json())
             )
         );
@@ -60,15 +60,55 @@ async function fetchFromHackerNews(articles) {
     }
 }
 
-async function fetchFromDemoRSS(articles) {
-    // Placeholder for future RSS integration
+async function fetchFromRSS(articles) {
+    const rssSources = [
+        {
+            name: 'TechCrunch AI',
+            url: 'https://techcrunch.com/category/artificial-intelligence/feed/'
+        },
+        {
+            name: 'VentureBeat AI',
+            url: 'https://venturebeat.com/category/ai/feed/'
+        },
+        {
+            name: 'AI News',
+            url: 'https://artificialintelligence-news.com/feed/'
+        }
+    ];
+
+    for (const source of rssSources) {
+        try {
+            const rss2jsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(source.url)}`;
+            const response = await fetch(rss2jsonUrl);
+            const data = await response.json();
+
+            if (data.status === 'ok' && data.items) {
+                data.items.forEach(item => {
+                    const content = `${item.title} ${item.description || ''}`;
+                    if (isAIAgentRelated(content)) {
+                        articles.push({
+                            title: item.title,
+                            description: cleanHTML(item.description),
+                            url: item.link,
+                            source: source.name,
+                            publishedAt: item.pubDate,
+                            imageUrl: item.thumbnail || null
+                        });
+                    }
+                });
+            }
+        } catch (error) {
+            console.error(`Error fetching from ${source.name}:`, error);
+        }
+    }
 }
 
 function isAIAgentRelated(text) {
     const keywords = [
-        'ai agent', 'autonomous agent', 'llm agent', 'ai automation',
-        'agentic', 'multi-agent', 'agent framework', 'langchain',
-        'autogen', 'crewai', 'agent system', 'intelligent agent'
+        'ai agent', 'ai agents', 'autonomous agent', 'llm agent', 'ai automation',
+        'agentic', 'multi-agent', 'multi agent', 'agent framework', 'agents framework',
+        'workflow automation', 'autonomous ai', 'tool-using agents', 'crew.ai',
+        'crewai', 'autogen', 'auto-gen', 'agent system', 'intelligent agent'
     ];
     const lowerText = text.toLowerCase();
     return keywords.some(keyword => lowerText.includes(keyword));
@@ -78,7 +118,7 @@ function cleanHTML(html) {
     if (!html) return '';
     const temp = document.createElement('div');
     temp.innerHTML = html;
-    return temp.textContent.slice(0, 200) + '...';
+    return temp.textContent.slice(0, 220) + (temp.textContent.length > 220 ? '...' : '');
 }
 
 function removeDuplicates(articles) {
