@@ -2,6 +2,8 @@
 
 Real-time dashboard tracking AI agent news, research, and developments worldwide.
 
+> Cloudflare Pages indexing trigger: This change ensures Pages re-indexes this repository.
+
 ## Features
 
 - Live AI agent news feed
@@ -13,19 +15,17 @@ Real-time dashboard tracking AI agent news, research, and developments worldwide
 
 ## Live Demo
 
-Once GitHub Pages is enabled, the dashboard will be available at:
-
-- https://SamoTech.github.io/AgentScope
+Once Cloudflare Pages is connected and deployed, the dashboard will be available at your `*.pages.dev` URL.
 
 ## Tech Stack
 
 - HTML, CSS, JavaScript (no frameworks)
-- GitHub Pages for hosting
+- Static hosting (Cloudflare Pages, Netlify, or GitHub Pages)
 - Hacker News API for free, no-key news data
 
 ## Usage
 
-1. Enable GitHub Pages in the repository settings (Pages → Deploy from branch → `main` → `/` root).
+1. Connect this repo to your static hosting provider.
 2. Open the published URL in your browser.
 3. The page will automatically fetch AI agent–related news and refresh periodically.
 
