@@ -1,0 +1,53 @@
+name: Sponsor workflow
+
+on:
+  issue_comment:
+    types: [created]
+  issues:
+    types: [opened, labeled]
+
+jobs:
+  sponsor:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    if: github.event_name == 'issue_comment' && contains(github.event.comment.body, '/sponsor')
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comment sponsor info
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            ## 🙏 Thanks for your interest!
+            
+            AgentScope is 100% open source and made with ❤️ by **SamoTech**.
+            
+            **Sponsor via:**
+            - ☕ Buy me a coffee: [ko-fi.com/samotech](https://ko-fi.com/samotech)
+            - 💰 GitHub Sponsors: [@SamoTech](https://github.com/sponsors/SamoTech)
+            - 🏦 PayPal: samo.hossam@gmail.com
+            
+            Every contribution helps keep this project growing! 🚀
+
+  sponsor-issue:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    if: github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'sponsor')
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add sponsor label
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          labels: sponsor, help-wanted
+
+  funding:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: james01344/Show-your-sponsors@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
