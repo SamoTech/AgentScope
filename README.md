@@ -6,29 +6,29 @@
 
 *A single-file, zero-build, zero-backend AI intelligence dashboard tracking the agentic AI ecosystem in real-time*
 
-[![Live Dashboard](https://img.shields.io/badge/🚀_Live-Dashboard-00e0ff?style=for-the-badge&labelColor=1a1d2e)](https://agentscope.netlify.app)
-[![Made with Vanilla JS](https://img.shields.io/badge/Made_with-Vanilla_JS-f7df1e?style=for-the-badge&logo=javascript&logoColor=black&labelColor=1a1d2e)](https://github.com/SamoTech/AgentScope)
-[![Zero Dependencies](https://img.shields.io/badge/Dependencies-0-00d68f?style=for-the-badge&labelColor=1a1d2e)](https://github.com/SamoTech/AgentScope)
-[![No Build Step](https://img.shields.io/badge/Build_Step-None-ff4d6a?style=for-the-badge&labelColor=1a1d2e)](https://github.com/SamoTech/AgentScope)
-
-[![GitHub Stars](https://img.shields.io/github/stars/SamoTech/AgentScope?style=for-the-badge&logo=github&color=ffd166&labelColor=1a1d2e)](https://github.com/SamoTech/AgentScope/stargazers)
-[![License: MIT](https://img.shields.io/badge/License-MIT-6b46c1?style=for-the-badge&labelColor=1a1d2e)](LICENSE)
-[![Netlify Status](https://img.shields.io/netlify/3e8b8e0c-9d4f-4e7a-8f3d-9c7e6d5a4b3c?style=for-the-badge&logo=netlify&labelColor=1a1d2e)](https://agentscope.netlify.app)
-[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-00d68f?style=for-the-badge&labelColor=1a1d2e)](https://github.com/SamoTech/AgentScope/pulls)
-
-[![Sponsor](https://img.shields.io/badge/💖_Sponsor-Support_Development-ff69b4?style=for-the-badge&labelColor=1a1d2e)](https://github.com/sponsors/SamoTech)
-[![Follow on GitHub](https://img.shields.io/github/followers/SamoTech?label=Follow&style=for-the-badge&logo=github&color=3d8bff&labelColor=1a1d2e)](https://github.com/SamoTech)
-[![Twitter Follow](https://img.shields.io/badge/Follow-%40OssamaHashim-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white&labelColor=1a1d2e)](https://twitter.com/OssamaHashim)
-
 ---
 
-### 🎯 **[Launch Dashboard →](https://agentscope.netlify.app)**
+<!-- Project Status -->
+![GitHub Stars](https://img.shields.io/github/stars/SamoTech/AgentScope?style=flat-square&logo=github&color=ffd166)
+![License](https://img.shields.io/badge/license-MIT-6b46c1?style=flat-square)
+![Last Commit](https://img.shields.io/github/last-commit/SamoTech/AgentScope?style=flat-square&color=00d68f)
+![Code Size](https://img.shields.io/github/languages/code-size/SamoTech/AgentScope?style=flat-square)
 
-*Open `index.html` in any browser or deploy to Netlify/Cloudflare Pages in seconds — no installation required*
+<!-- Tech Stack -->
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+
+<!-- Deployment -->
+![Netlify](https://img.shields.io/netlify/3e8b8e0c-9d4f-4e7a-8f3d-9c7e6d5a4b3c?style=flat-square&logo=netlify&label=deploy)
+![Dependencies](https://img.shields.io/badge/dependencies-0-00d68f?style=flat-square)
+![Build](https://img.shields.io/badge/build-none-ff4d6a?style=flat-square)
+
+**[🚀 Live Dashboard](https://agentscope.netlify.app)** | **[📝 Documentation](docs/AGENTSCOPE_PRO_V2_REFERENCE.md)** | **[🐛 Issues](https://github.com/SamoTech/AgentScope/issues)**
+
+---
 
 </div>
-
----
 
 ## ⚡ Why AgentScope?
 
@@ -475,19 +475,15 @@ git push origin feature/add-new-ticker
 
 ---
 
-## 💖 Sponsor & Support
+## 💖 Support This Project
 
 <div align="center">
 
-**If AgentScope saves you time or inspires your next project, consider supporting its development!**
+If AgentScope saves you time or inspires your next project, consider supporting its development!
 
-[![Sponsor on GitHub](https://img.shields.io/badge/💖_Sponsor-GitHub_Sponsors-ff69b4?style=for-the-badge&labelColor=1a1d2e)](https://github.com/sponsors/SamoTech)
-[![PayPal](https://img.shields.io/badge/PayPal-Donate-00457C?style=for-the-badge&logo=paypal&logoColor=white&labelColor=1a1d2e)](https://paypal.me/OnlinePayMe)
-[![Buy Me A Coffee](https://img.shields.io/badge/Buy_Me_A_Coffee-Support-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black&labelColor=1a1d2e)](https://buymeacoffee.com/samotech)
-
-### 🌟 **Your Support Enables:**
-
-✨ New features & enhancements  |  🐛 Bug fixes & maintenance  |  📚 Documentation improvements  |  🌐 Community support
+[![GitHub Sponsor](https://img.shields.io/badge/Sponsor-GitHub-ff69b4?style=flat-square&logo=github)](https://github.com/sponsors/SamoTech)
+[![PayPal](https://img.shields.io/badge/Donate-PayPal-00457C?style=flat-square&logo=paypal)](https://paypal.me/OnlinePayMe)
+[![Buy Me A Coffee](https://img.shields.io/badge/Support-Buy_Me_A_Coffee-FFDD00?style=flat-square&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/samotech)
 
 </div>
 
@@ -559,19 +555,19 @@ git push origin feature/add-new-ticker
 
 <div align="center">
 
-## 👋 **Connect With Us**
+## 👋 Connect
 
-[![GitHub](https://img.shields.io/badge/GitHub-SamoTech-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/SamoTech)
-[![Twitter](https://img.shields.io/badge/Twitter-%40OssamaHashim-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/OssamaHashim)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Ossama_Hashim-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/ossamahashim)
-[![Email](https://img.shields.io/badge/Email-samo.hossam%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:samo.hossam@gmail.com)
+[![GitHub](https://img.shields.io/badge/GitHub-SamoTech-181717?style=flat-square&logo=github)](https://github.com/SamoTech)
+[![Twitter](https://img.shields.io/badge/Twitter-@OssamaHashim-1DA1F2?style=flat-square&logo=twitter)](https://twitter.com/OssamaHashim)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Ossama_Hashim-0077B5?style=flat-square&logo=linkedin)](https://linkedin.com/in/ossamahashim)
+[![Email](https://img.shields.io/badge/Email-samo.hossam@gmail.com-D14836?style=flat-square&logo=gmail)](mailto:samo.hossam@gmail.com)
 
 ---
 
-**Made with ❤️ by [SamoTech](https://github.com/SamoTech)** · Cairo, Egypt · February 2026
+**Made with ❤️ by [Ossama Hashim](https://github.com/SamoTech)** · Cairo, Egypt · February 2026
 
-*Tracking the agentic AI revolution, one data point at a time.* 🚀🤖
+*Tracking the agentic AI revolution, one data point at a time.* 🚀
 
-[![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FSamoTech%2FAgentScope&label=Visitors&countColor=%2300d68f&style=for-the-badge&labelStyle=upper)](https://visitorbadge.io/status?path=https%3A%2F%2Fgithub.com%2FSamoTech%2FAgentScope)
+![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FSamoTech%2FAgentScope&label=Visitors&countColor=%2300d68f&style=flat-square)
 
 </div>
