@@ -18,7 +18,7 @@
 
 [![Sponsor](https://img.shields.io/badge/💖_Sponsor-Support_Development-ff69b4?style=for-the-badge&labelColor=1a1d2e)](https://github.com/sponsors/SamoTech)
 [![Follow on GitHub](https://img.shields.io/github/followers/SamoTech?label=Follow&style=for-the-badge&logo=github&color=3d8bff&labelColor=1a1d2e)](https://github.com/SamoTech)
-[![Twitter Follow](https://img.shields.io/badge/Follow-%40SamoTech-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white&labelColor=1a1d2e)](https://twitter.com/SamoTech)
+[![Twitter Follow](https://img.shields.io/badge/Follow-%40OssamaHashim-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white&labelColor=1a1d2e)](https://twitter.com/OssamaHashim)
 
 ---
 
@@ -562,8 +562,8 @@ git push origin feature/add-new-ticker
 ## 👋 **Connect With Us**
 
 [![GitHub](https://img.shields.io/badge/GitHub-SamoTech-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/SamoTech)
-[![Twitter](https://img.shields.io/badge/Twitter-%40SamoTech-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/SamoTech)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Ossama_Hashim-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/samotech)
+[![Twitter](https://img.shields.io/badge/Twitter-%40OssamaHashim-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/OssamaHashim)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Ossama_Hashim-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/ossamahashim)
 [![Email](https://img.shields.io/badge/Email-samo.hossam%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:samo.hossam@gmail.com)
 
 ---
