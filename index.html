@@ -945,9 +945,6 @@ footer {
 
 /* ── CONFIG ─────────────────────────────────────────────────────── */
 const CFG = {
-  FMP_KEY: 'demo',
-  RSS2JSON: 'https://api.rss2json.com/v1/api.json',
-  RSS_COUNT: 25,
   REFRESH_MS: 5 * 60 * 1000,
   MAX_NEWS: 80,
 
@@ -1159,7 +1156,7 @@ function mockSpark(price, chg) {
 async function fetchStocks() {
   const tickers = CFG.STOCKS.map(s=>s.t).join(',');
   try {
-    const res  = await fetch(`https://financialmodelingprep.com/api/v3/quote/${tickers}?apikey=${CFG.FMP_KEY}`);
+    const res  = await fetch(`/api/proxy?action=stocks&tickers=${tickers}`);
     const data = await res.json();
     if (!Array.isArray(data) || !data.length) throw new Error('bad response');
 
@@ -1167,7 +1164,8 @@ async function fetchStocks() {
       const meta = CFG.STOCKS.find(s => s.t === q.symbol) || {};
       return { ...q, seg: meta.seg || 'Other', name: meta.n || q.name };
     });
-  } catch {
+  } catch (e) {
+    console.error('Failed to fetch stocks from edge proxy', e);
     // Fallback: generate plausible mock data
     S.stocks = CFG.STOCKS.map((s,i) => {
       const price  = [850,45,28,420,180,74,120,52,390,165,180,95,145,480,272,842,185,95,155,85,158,55,750,26,132,88,310,22,245,18][i] || 80 + Math.random()*200;
@@ -1319,35 +1317,22 @@ function updateKPI() {
 
 /* ── NEWS — FETCH ───────────────────────────────────────────────── */
 async function fetchNews() {
-  const rssFetches = CFG.NEWS_SOURCES.map(src =>
-    fetch(`${CFG.RSS2JSON}?rss_url=${encodeURIComponent(src.u)}&count=${CFG.RSS_COUNT}`)
-      .then(r => r.json())
-      .then(d => (d.items || []).map(it => ({ ...it, _src: src.n })))
-      .catch(() => [])
-  );
+  try {
+    const feeds = CFG.NEWS_SOURCES.map(s => `${encodeURIComponent(s.n)}|${encodeURIComponent(s.u)}`).join(',');
+    const res = await fetch(`/api/proxy?action=news&feeds=${feeds}`);
+    const all = await res.json();
 
-  const hnFetch = fetch('https://hacker-news.firebaseio.com/v0/beststories.json')
-    .then(r => r.json())
-    .then(ids => Promise.all(ids.slice(0,25).map(id =>
-      fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then(r=>r.json()).catch(()=>null)
-    )))
-    .then(items => items.filter(i=>i&&i.title&&/\b(ai|agent|llm|gpt|claude|gemini|openai|anthropic|model|automat|robot|copilot|neural)\b/i.test(i.title)).map(i=>({
-      title:i.title, link:i.url||`https://news.ycombinator.com/item?id=${i.id}`,
-      description:`⬆ ${i.score||0} pts · 💬 ${i.descendants||0} comments`,
-      pubDate:new Date(i.time*1000).toISOString(), _src:'Hacker News',
-    })))
-    .catch(()=>[]);
-
-  const [hn, ...rss] = await Promise.all([hnFetch, ...rssFetches]);
-  const all = [...hn, ...rss.flat()];
-
-  // Deduplicate
-  const seen = new Set();
-  S.allNews = all.filter(a => {
-    const k = (a.title||'').toLowerCase().slice(0,50);
-    if (seen.has(k)) return false;
-    seen.add(k); return true;
-  }).sort((a,b) => new Date(b.pubDate||0) - new Date(a.pubDate||0));
+    // Deduplicate
+    const seen = new Set();
+    S.allNews = (all || []).filter(a => {
+      const k = (a.title||'').toLowerCase().slice(0,50);
+      if (seen.has(k)) return false;
+      seen.add(k); return true;
+    }).sort((a,b) => new Date(b.pubDate||0) - new Date(a.pubDate||0));
+  } catch (e) {
+    console.error('News fetch failed via proxy', e);
+    S.allNews = [];
+  }
 
   $('kArticles').textContent = S.allNews.length;
   filterNews();
