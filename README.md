@@ -1,107 +1,419 @@
-<div align="center">
-  <h1>🤖 AgentScope Pro</h1>
-  <p><strong>The Zero-Build AI Intelligence Terminal</strong></p>
+# 🤖 AgentScope Pro
 
-  [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-  [![Zero Dependencies](https://img.shields.io/badge/Dependencies-0-brightgreen.svg)]()
-  [![Build Step](https://img.shields.io/badge/Build_Step-None-red.svg)]()
-  [![Netlify Edge](https://img.shields.io/badge/Netlify_Edge-Enabled-00C7B7.svg?logo=netlify)]()
-  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#-contributing-the-60-second-pr)
+**Professional AI Intelligence Terminal**
 
-  <p>
-    A Bloomberg-style dashboard tracking the Agentic AI ecosystem.<br>
-    Built entirely with vanilla HTML/JS and a single Edge Function. 100% hackable.
-  </p>
-</div>
+AgentScope Pro is a **single-file, zero-build, zero-backend AI intelligence dashboard** that tracks the agentic AI ecosystem in real-time. Open `index.html` in any browser or deploy to Netlify/Cloudflare Pages in seconds — no installation required.
+
+[![Live Dashboard](https://img.shields.io/badge/Live-Dashboard-00e0ff?style=for-the-badge&logo=netlify&logoColor=white)](https://agentscope.netlify.app)
+[![License: MIT](https://img.shields.io/badge/License-MIT-6b46c1?style=for-the-badge)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/SamoTech/AgentScope?style=for-the-badge&color=ffd166)](https://github.com/SamoTech/AgentScope/stargazers)
+[![Sponsor](https://img.shields.io/badge/Sponsor-💖-ff69b4?style=for-the-badge)](https://github.com/sponsors/SamoTech)
 
 ---
 
-## ⚡ The Anti-Bloatware Terminal
+## 🎯 Live Dashboard
 
-The modern web developer ecosystem is suffering from JavaScript fatigue. We've been told you need 500MB of `node_modules`, complex Webpack configurations, and heavy Docker containers just to fetch a few APIs and render a dashboard.
+**🚀 https://agentscope.netlify.app**
 
-**AgentScope proves otherwise.**
+- **30 AI stocks** across 7 segments (Pure AI, GPU, Cloud, Agents, Chips, Data/AI, Robotics)
+- **13 news sources** with sentiment analysis and category classification
+- **Bloomberg-style UI** with ticker tape, sidebar analytics, heatmaps
+- **5-dimensional filtering** (source, category, sentiment, search, time)
+- **Light/Dark themes** (T key) · **Auto-refresh** every 5 minutes
+- **Keyboard shortcuts**: R = refresh, T = theme, / = search
 
-We built a real-time, institutional-grade AI market terminal using **pure HTML, CSS, and ES Modules**, protected by a single Serverless Edge proxy. It requires zero DevOps configuration to deploy, zero build steps to modify, and zero databases to maintain.
+---
 
-## 🏗 Architecture: The Edge-Cached Proxy
+## 🆕 What's New in v2.0 Professional
 
-How do we serve hundreds of users daily without hitting the strict 250-request limit on free financial APIs? **Stale-While-Revalidate (SWR) Edge Caching.**
+### 📊 Stock Tracking: 9 → 30 Tickers Across 7 Segments
 
-Clients never hit external APIs directly. Instead:
-1. The browser requests data from our Netlify proxy (`/.netlify/functions/proxy`).
-2. Netlify's Edge CDN intercepts the request. If cached, it serves it instantly (0ms).
-3. If the cache is older than 15 minutes, Netlify serves the stale data instantly *while* seamlessly fetching live data from the APIs in the background to update the cache.
+| Segment | Tickers |
+|---------|----------|
+| **🤖 Pure AI** | AI (C3.ai), SOUN, BBAI, AITX, AMBA |
+| **🖥 GPU/Infra** | NVDA, AMD, INTC |
+| **☁️ Cloud** | MSFT, GOOGL, AMZN, ORCL, IBM |
+| **⚡ Agents** | META, CRM, NOW, PEGA, NICE |
+| **💡 Chips** | AVGO, ARM, QCOM, MRVL, ASML |
+| **📊 Data/AI** | PLTR, SNOW, MDB, DDOG, S |
+| **🦶 Robotics** | TSLA, IRBT |
 
-```mermaid
-graph LR
-    Client[Browser] -->|Native Fetch| CDN[Netlify Edge CDN]
-    CDN -->|Cache Miss| Proxy[Netlify Function: Proxy]
-    Proxy -->|Fetch Live| API1[FMP Stocks API]
-    Proxy -->|Fetch Live| API2[HackerNews / RSS]
-    Proxy -.->|Cache for 15m| CDN
+### 📰 News Expansion: 4 → 13 Sources
+
+| Source | Type | Coverage |
+|--------|------|----------|
+| **Hacker News** | API | Developer discussions, top AI stories |
+| **TechCrunch AI** | RSS | Startups, funding, product launches |
+| **VentureBeat AI** | RSS | Enterprise AI, agent frameworks |
+| **AI News** | RSS | Research, industry analysis |
+| **The Verge AI** | RSS | Consumer AI products |
+| **Wired AI** | RSS | Long-form tech journalism |
+| **MIT Technology Review** | RSS | Research-grade coverage |
+| **ZDNet AI** | RSS | Enterprise technology |
+| **InfoQ AI** | RSS | Engineering & architecture |
+| **Analytics Vidhya** | RSS | ML/Data Science |
+| **KDnuggets** | RSS | Data science, ML news |
+| **AI Business** | RSS | Business applications |
+| **DataScienceWeekly** | RSS | Curated newsletter |
+
+### 🎆 Professional UI Enhancements
+
+#### 📊 Sidebar Analytics (Desktop)
+- 🔥 **Heatmap** — Top 8 movers with color-coded cells
+- 📊 **Sector Performance** — Average % change bars per segment
+- 📰 **Source Distribution** — Article counts by publisher with bar chart
+- 🏷️ **Trending Topics** — Clickable AI keyword cloud extracted from all articles
+- ⌨️ **Keyboard Shortcuts** — Quick reference panel
+
+#### 📢 Bloomberg-Style Features
+- **Ticker Tape** — Scrolling marquee with all 30 stocks (real-time % changes)
+- **Market Status** — Live NYSE/NASDAQ open/closed indicator (Eastern Time)
+- **8 KPI Cells** — Last Sync | Stocks Tracked | Articles Live | Top Gainer | Top Loser | Sources | Next Refresh
+
+#### 🎯 Advanced Filtering
+- **Global Search** — Searches stocks AND news simultaneously
+- **Sort Controls** — % change ↓↑ | Price ↓↑ | A–Z
+- **Quick Filters** — 🟽 Gainers | 🟽 Losers (one-click)
+- **Sentiment Row** — 📈 Bullish | ➡ Neutral | 📉 Bearish
+- **5D News Filter** — Source + Category + Sentiment + Search + Time
+
+#### 🎨 Visual Design
+- **Canvas Sparklines** — Gradient-filled trend charts on every stock card
+- **Sentiment Badges** — Color-coded keyword-based analysis (📈 Bullish / 📉 Bearish / ➡ Neutral)
+- **Category Tags** — 🤖 Agents / 🔬 Research / ⚙️ Infra / 💰 Funding / 🏛️ Policy
+- **Loading Skeletons** — Shimmer animation (no blank flashes)
+- **Staggered Fade-In** — Smooth card entrance animations
+- **JetBrains Mono + Outfit** — Professional terminal aesthetic
+
+---
+
+## 💻 Architecture
+
+### Single-File Design
+
+```
+index.html (1 file, ~1,568 lines)
+├─ <style>  — Complete design system with CSS custom properties
+│   ├─ :root tokens (dark) + [data-theme="light"] overrides
+│   ├─ Nav, Ticker Tape, KPI Bar, Sidebar
+│   ├─ Stock cards, News cards, Heatmap, Charts
+│   └─ Skeleton loaders, animations, responsive grid
+│
+└─ <script> — IIFE application (zero globals)
+    ├─ CFG       — Config: 30 stocks, 13 sources, API keys
+    ├─ STATE     — Single state object (stocks, news, filters)
+    ├─ UTILS     — timeAgo, readTime, fmtPrice, fmtChange
+    ├─ MARKET    — NYSE/NASDAQ hours detection
+    ├─ SENTIMENT — Keyword-based classifier
+    ├─ CATEGORY  — Auto-detect article categories
+    ├─ TOPICS    — Extract trending keywords
+    ├─ SPARKLINE — Canvas 2D charts with gradients
+    ├─ STOCKS    — Fetch, filter, sort, render
+    ├─ TAPE      — Scrolling ticker marquee
+    ├─ HEATMAP   — Top movers visualization
+    ├─ SECTORS   — Avg % per segment bars
+    ├─ NEWS      — Parallel HN + RSS fetch + dedupe
+    ├─ SIDEBAR   — Analytics widgets
+    ├─ KPI       — Update dashboard metrics
+    ├─ COUNTDOWN — Next refresh timer
+    ├─ THEME     — Light/dark toggle
+    └─ EVENTS    — Keyboard shortcuts + filters
 ```
 
-## ✨ Features
+### Design System Tokens
 
-- **Real-Time AI Market Data:** Tracks 30 AI equities across Compute, Agents, Data, and Robotics.
-- **Developer News Ingestion:** Parallel streaming of Hacker News and AI developer RSS feeds.
-- **Bloomberg-Style UI:** Ticker tapes, heatmaps, canvas sparklines, and sentiment badges.
-- **Client-Side Compute:** Sentiment analysis and trending topic extraction happen entirely in the browser to save server compute.
-- **Zero-Build Ecosystem:** Just double-click `index.html` to start developing.
+```css
+/* Dark Theme (Default) */
+--bg-base:    #03070f   /* Page background */
+--bg-surface: #080f1c   /* Nav, KPI bar */
+--bg-card:    #0c1526   /* Cards */
+--accent:     #3d8bff   /* Interactive elements */
+--green:      #00d68f   /* Positive */
+--red:        #ff4d6a   /* Negative */
+--text-1:     #dce8ff   /* Primary text */
+--f-mono:     "JetBrains Mono"  /* Data, code */
+--f-ui:       "Outfit"          /* UI, headlines */
 
-## 🚀 Quick Start (Local Dev)
+/* Light theme available via [data-theme="light"] */
+```
 
-Because there is no build step, getting started takes less than 10 seconds.
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| **Frontend** | Pure HTML, CSS, JavaScript (ES2020) |
+| **Architecture** | IIFE module pattern (zero globals) |
+| **Fonts** | JetBrains Mono (Google Fonts) + Outfit |
+| **Charts** | Canvas 2D API (sparklines, heatmap) |
+| **Hosting** | Netlify (or Cloudflare Pages, GitHub Pages) |
+| **Stock Data** | FinancialModelingPrep API (FMP) |
+| **News** | Hacker News API + RSS2JSON (12 RSS feeds) |
+| **Build** | ❌ None — runs directly in browser |
+| **Dependencies** | ❌ None — zero npm packages |
+
+---
+
+## 🚀 Quick Start
+
+### Option 1: Run Locally (No Install)
 
 ```bash
-# 1. Clone the repository
+# Clone and open
 git clone https://github.com/SamoTech/AgentScope.git
 cd AgentScope
-
-# 2. Add your free FMP API key
-cp .env.example .env
-# Edit .env and add FMP_API_KEY=your_key_here
-
-# 3. Start the local serverless proxy
-npx netlify dev
+open index.html  # macOS
+# OR: start index.html on Windows
+# OR: python3 -m http.server 8000
 ```
-*Note: You can even just open `index.html` in your browser to view the UI, but the local Netlify dev server is required to proxy the API calls.*
 
-## 🛠 Tech Stack
+### Option 2: Deploy to Netlify (1 Click)
 
-| Layer | Technology | Why We Chose It |
-|-------|------------|-----------------|
-| **Frontend** | Vanilla JS (ES Modules), HTML5 | Instant edits. No compilation. True to the open web. |
-| **Styling** | Pure CSS Variables | No Tailwind or preprocessors required. |
-| **Edge Cache** | Netlify Edge CDN | `s-maxage=900` protects our free-tier API limits perfectly. |
-| **Backend** | Netlify Functions (Node 18) | A single `proxy.js` file hides our API keys from the browser. |
-| **Data** | FinancialModelingPrep & Algolia | Generous free tiers for real-time market and news data. |
+1. Fork this repo
+2. Connect to Netlify: **"New site from Git"**
+3. Build settings: **Leave empty** (static site, no build needed)
+4. Optional: Add environment variable `FMP_API_KEY` (your FMP key)
+5. Deploy → Live at `https://your-site.netlify.app`
 
-## 🤝 Contributing (The 60-Second PR)
+### Option 3: Cloudflare Pages
 
-Want to contribute to open-source but hate setting up local environments? AgentScope is designed for the **60-Second PR**.
+```yaml
+Build command: exit 0
+Build output directory: /
+Root directory: /
+```
 
-Want to add a new AI startup to the tracker? 
-1. Fork the repo.
-2. Open `netlify/functions/proxy.js`.
-3. Add the ticker symbol to the `tickers` array.
-4. Submit your PR.
+### Option 4: GitHub Pages
 
-Check our [Issues tab](https://github.com/SamoTech/AgentScope/issues) for `good first issue` tags!
-
-## 🗺 Roadmap
-
-- [ ] **v2.1:** GitHub Trending AI Repositories integration.
-- [ ] **v3.0:** Custom URL Hash Watchlists (Build and share your own terminal view like `?tickers=NVDA,PLTR`).
-- [ ] **v4.0:** BYO-LLM (Bring Your Own LLM) - Enter your Anthropic key in `localStorage` for client-side news summarization.
-
-## 💖 Sponsor & Support
-
-If AgentScope saves you time or if you support the anti-bloatware engineering philosophy, consider supporting development:
-
-- **GitHub Sponsors:** [github.com/sponsors/SamoTech](https://github.com/sponsors/SamoTech)
-- **Star the Repo:** ⭐ It helps us attract more contributors!
+1. Go to repo Settings → Pages
+2. Source: Deploy from `main` branch, `/` root
+3. Your site: `https://<username>.github.io/AgentScope`
 
 ---
-*Made with ❤️ by [SamoTech](https://github.com/SamoTech) · Tracking the agentic AI revolution, one data point at a time.*
+
+## 🧪 Local Development
+
+**Zero setup required.** Just edit `index.html` and refresh your browser.
+
+```bash
+# Recommended: Use VS Code Live Server extension
+code index.html
+# Right-click → "Open with Live Server"
+
+# Or use Python
+python3 -m http.server 8000
+# Visit http://localhost:8000
+```
+
+**All changes are instant** — no build step, no hot reload config, no webpack.
+
+---
+
+## 📈 Roadmap
+
+### ✅ v1.0 — Base Release (Completed)
+- FMP stock data (7 tickers)
+- RSS news (4 sources: HN, TechCrunch, VentureBeat, AI News)
+- Dark-themed two-panel UI with KPIs
+- Segment + source filters
+- Auto-refresh every 5 minutes
+
+### ✅ v1.1 — Signal Layer (Completed)
+- ✅ Canvas sparkline charts on stock cards
+- ✅ Sentiment badges (bullish/bearish/neutral)
+- ✅ Category tags (Agents/Research/Infra/Funding)
+- ✅ Light/dark theme toggle
+- ✅ Loading skeleton animation
+- ✅ Top Mover KPI + countdown timer
+- ✅ Cross-source news deduplication
+- ✅ Read time estimates
+- ✅ Keyboard shortcuts (R, T)
+- ✅ Expanded to 9 stocks (added PLTR, ORCL)
+- ✅ IIFE architecture with labeled sections
+- ✅ Mock data fallback
+- ✅ Search debounce (280ms)
+
+### ✅ v2.0 — Professional (Current)
+- ✅ **30 stocks** across 7 segments
+- ✅ **13 news sources** (HN + 12 RSS feeds)
+- ✅ **Sidebar analytics** (heatmap, sectors, source dist, topics)
+- ✅ **Ticker tape** scrolling marquee
+- ✅ **Market status** indicator (NYSE hours)
+- ✅ **8 KPI cells** (sync, stocks, articles, gainer, loser, sources, refresh)
+- ✅ **5-dimensional news filtering**
+- ✅ **Sort controls** (% change, price, A-Z)
+- ✅ **Gainer/Loser quick filters**
+- ✅ **Sentiment filter row**
+- ✅ **Policy category** (regulatory news)
+- ✅ **Global search** (stocks + news)
+- ✅ **Trending topics** sidebar widget
+
+### 🔜 v2.1 — Intelligence Layer (Next)
+- [ ] **GitHub Trending AI Repos** panel
+- [ ] **Netlify Function** FMP proxy (hide API key)
+- [ ] **Weighted sentiment** with confidence scores
+- [ ] **PWA + offline mode** (service worker)
+- [ ] **Custom domain** (e.g., agentscope.dev)
+
+### 📅 v3.0 — Personalization
+- [ ] **Price alerts** (localStorage persistence)
+- [ ] **Portfolio tracker** (shares, P&L, holdings)
+- [ ] **URL hash watchlists** (shareable custom tickers)
+- [ ] **WebSocket real-time prices** (Finnhub)
+- [ ] **User preferences** (default filters, watchlist)
+
+### 🧪 v4.0 — AI-Powered
+- [ ] **Claude-powered news digest** (3-sentence summary)
+- [ ] **Batch sentiment via LLM** (confidence scores)
+- [ ] **AI ecosystem map** (visual framework graph)
+- [ ] **Earnings calendar** integration
+- [ ] **Multi-agent workflow** tracking
+
+---
+
+## 👨‍💻 AI Development Prompt
+
+**Want to extend AgentScope Pro?** Use this prompt with Claude, GPT-4o, or Gemini:
+
+```markdown
+You are building AgentScope Pro (https://github.com/SamoTech/AgentScope),
+a single-file AI intelligence dashboard.
+
+Constraints:
+- Pure HTML/CSS/JS (no npm, bundler, framework)
+- IIFE pattern (no modules)
+- Must work by opening index.html directly
+- Deploys to Netlify/Cloudflare with zero config
+
+Current stack:
+- 30 stocks (7 segments: Pure AI, GPU, Cloud, Agents, Chips, Data/AI, Robotics)
+- 13 news sources (HN + 12 RSS feeds)
+- FMP API (stocks) + RSS2JSON + HN Firebase API
+- JetBrains Mono + Outfit fonts
+
+Task: [YOUR FEATURE REQUEST]
+
+Output:
+- Complete updated index.html
+- Preserve all existing functionality
+- Add new IIFE section with /* ── LABEL ── */ header
+- Match existing animation patterns
+- Mobile responsive (480px, 768px)
+- Graceful error handling
+```
+
+**Full developer reference with 9 example tasks:**
+📚 [docs/AGENTSCOPE_PRO_V2_REFERENCE.md](docs/AGENTSCOPE_PRO_V2_REFERENCE.md)
+
+---
+
+## 🔗 APIs & Data Sources
+
+| API | Purpose | Tier | Rate Limit |
+|-----|---------|------|------------|
+| **FMP** | Stock prices & changes | Free developer | Limited requests |
+| **Hacker News** | Top AI stories | Free | Unlimited |
+| **RSS2JSON** | RSS feed parsing | Public | ~1,000/day |
+| **13 RSS Feeds** | AI news aggregation | Free | No limit |
+
+**Replace/extend:** You can use your own FMP key or self-host RSS proxies.
+
+---
+
+## 🤝 Contributing
+
+AgentScope Pro is **intentionally simple and hackable**.
+
+### How to Contribute
+
+1. **Fork** the repo
+2. **Create a feature branch:**
+   ```bash
+   git checkout -b feature/your-feature
+   ```
+3. **Make your changes** (edit `index.html` directly)
+4. **Commit with clear message:**
+   ```bash
+   git commit -m "feat: add [your feature]"
+   ```
+5. **Push and open PR:**
+   ```bash
+   git push origin feature/your-feature
+   ```
+
+### Contribution Ideas
+
+- ⭐ Add new AI news sources
+- 📊 Add new stock tickers or segments
+- 🎨 Improve UI/UX design
+- 🐛 Fix bugs or improve error handling
+- 📝 Improve documentation
+- ⚡ Performance optimizations
+- 🌍 Internationalization (i18n)
+
+**Tip:** Use the AI Development Prompt to prototype features first!
+
+**Sponsor workflow:** Type `/sponsor` in any issue to get sponsor links.
+
+---
+
+## 💖 Sponsor
+
+If AgentScope Pro saves you time or provides value, consider supporting development:
+
+- **GitHub Sponsors:** [github.com/sponsors/SamoTech](https://github.com/sponsors/SamoTech)
+- **PayPal:** samo.hossam@gmail.com
+
+Your support enables:
+- ✨ New features and enhancements
+- 🐛 Bug fixes and maintenance
+- 📚 Documentation improvements
+- 🌐 Community support
+
+---
+
+## 📄 License
+
+[MIT License](LICENSE) © 2026 **SamoTech** (Ossama Hashim)
+
+Permission is hereby granted, free of charge, to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of this software.
+
+---
+
+## 🎓 Learn More
+
+### Documentation
+
+- **📚 Pro v2 Developer Reference:** [docs/AGENTSCOPE_PRO_V2_REFERENCE.md](docs/AGENTSCOPE_PRO_V2_REFERENCE.md)
+  - Complete architecture breakdown
+  - Design system tokens
+  - AI development prompt with 9 example tasks
+  - Component reference
+  - Function documentation
+
+- **📄 v1.1 Analysis:** [docs/AGENTSCOPE_ANALYSIS_AND_PROMPT.md](docs/AGENTSCOPE_ANALYSIS_AND_PROMPT.md) *(legacy)*
+  - v1.0 → v1.1 upgrade analysis
+  - 14 identified issues + solutions
+  - 15 enhancement proposals
+
+### Quick Links
+
+- **Live Dashboard:** https://agentscope.netlify.app
+- **GitHub Repo:** https://github.com/SamoTech/AgentScope
+- **Issues:** https://github.com/SamoTech/AgentScope/issues
+- **Discussions:** https://github.com/SamoTech/AgentScope/discussions
+
+---
+
+## ⭐ Star History
+
+If you find this project useful, please consider giving it a star! ⭐
+
+[![Star History Chart](https://api.star-history.com/svg?repos=SamoTech/AgentScope&type=Date)](https://star-history.com/#SamoTech/AgentScope&Date)
+
+---
+
+**Made with ❤️ by [SamoTech](https://github.com/SamoTech)** · Cairo, Egypt · February 2026
+
+*Tracking the agentic AI revolution, one data point at a time.* 🚀🤖
