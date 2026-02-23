@@ -14,6 +14,9 @@ const AI_STOCKS = [
     { symbol: 'ARM',  name: 'Arm Holdings', segment: 'AI Chips / IP' }
 ];
 
+// Use embedded demo key by default to avoid CORS / auth issues in browser
+const FMP_API_KEY = (window && window.FMP_API_KEY) ? window.FMP_API_KEY : 'demo';
+
 let allArticles = [];
 let autoRefreshTimer = null;
 let aiStocks = [];
@@ -123,9 +126,8 @@ async function fetchAIStocks() {
     if (!container) return;
 
     try {
-        const API_KEY = window.FMP_API_KEY || 'DEMO_KEY_HERE'; // replace in Netlify env
         const symbols = AI_STOCKS.map(s => s.symbol).join(',');
-        const url = `https://financialmodelingprep.com/stable/stock-price-change?symbol=${symbols}&apikey=${API_KEY}`;
+        const url = `https://financialmodelingprep.com/stable/stock-price-change?symbol=${symbols}&apikey=${FMP_API_KEY}`;
 
         container.innerHTML = '<div class="placeholder">Loading AI market data...</div>';
 
@@ -134,7 +136,7 @@ async function fetchAIStocks() {
 
         if (!Array.isArray(data)) {
             console.error('Unexpected stocks response:', data);
-            container.innerHTML = '<div class="placeholder">Unable to load AI market data.</div>';
+            container.innerHTML = '<div class="placeholder">Unable to load AI market data (demo mode may be limited).</div>';
             return;
         }
 
@@ -155,7 +157,6 @@ async function fetchAIStocks() {
         updateStockKPI();
     } catch (error) {
         console.error('Error fetching AI stocks:', error);
-        const container = document.getElementById('stocksContainer');
         if (container) container.innerHTML = '<div class="placeholder">Unable to load AI market data.</div>';
     }
 }
@@ -165,7 +166,7 @@ function renderStocks(stocks) {
     if (!container) return;
 
     if (!stocks.length) {
-        container.innerHTML = '<div class="placeholder">No AI stock data available.</div>';
+        container.innerHTML = '<div class="placeholder">No AI stock data available (demo mode).</div>';
         return;
     }
 
