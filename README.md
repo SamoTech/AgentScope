@@ -5,6 +5,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/[your-site-id]/deploy-status)](https://agentscope.netlify.app)
 [![GitHub](https://img.shields.io/github/license/SamoTech/AgentScope?color=%236b46c1)](LICENSE)
 [![GitHub commits](https://img.shields.io/github/commits/main/SamoTech/AgentScope/main?color=%236b46c1)](https://github.com/SamoTech/AgentScope/commits/main)
+[![GitHub issues](https://img.shields.io/github/issues/SamoTech/AgentScope?color=%23ff6b6b)](https://github.com/SamoTech/AgentScope/issues)
 
 ## 🎯 Live Dashboard
 
@@ -13,23 +14,23 @@
 ## 🚀 Features
 
 ### AI Market Overview
-- Real-time AI infrastructure stock prices
-- % change, color-coded (green/red)
-- GPU, Cloud, Agent Platform segmentation
-- Segment filtering
+✅ **Live AI infrastructure stock prices** (NVDA, AMD, MSFT, GOOGL, META, AVGO, ARM)
+✅ **Real-time % change** (color-coded green/red)
+✅ **GPU, Cloud, Agent Platform segmentation**
+✅ **Segment filtering**
 
 ### AI Agents News Feed
-- Live news from Hacker News, TechCrunch AI, VentureBeat AI
-- RSS + API aggregation
-- Real-time search
-- Source filtering
-- Auto-refresh every 5 minutes
+✅ **Live news** from Hacker News + TechCrunch AI + VentureBeat AI + AI News
+✅ **RSS + API aggregation**
+✅ **Real-time search**
+✅ **Source filtering**
+✅ **Auto-refresh every 5 minutes**
 
 ### Professional UI
-- Dark theme, responsive design
-- KPI dashboard (stocks, articles, sync time)
-- LIVE status indicator
-- Modern card layouts
+✅ **Dark theme, responsive design**
+✅ **KPI dashboard** (stocks, articles, sync time)
+✅ **LIVE status indicator**
+✅ **Modern card layouts**
 
 ## 🛠️ Tech Stack
 
@@ -38,13 +39,14 @@
 | HTML/CSS/JS | Netlify | Hacker News API |
 | Vanilla JS | Global CDN | TechCrunch AI RSS |
 | Responsive | Auto-deploy | VentureBeat AI RSS |
+| | | FMP Stock API |
 
 ## 📊 AI Stock Tickers Tracked
 
 | Symbol | Company | Segment |
 |--------|---------|---------|
-| NVDA | NVIDIA | GPUs/Infrastructure |
-| AMD | AMD | GPUs/CPUs |
+| NVDA | NVIDIA | GPU/Infrastructure |
+| AMD | AMD | GPU/CPUs |
 | MSFT | Microsoft | Cloud/Copilot |
 | GOOGL | Alphabet | Cloud/DeepMind |
 | META | Meta | AI Infra/LLaMA |
@@ -62,10 +64,11 @@
 
 ## 🔧 Setup & Deployment
 
-### Netlify (Current)
+### Netlify (Live)
 1. Connected to GitHub repo
 2. Auto-deploys on push to main
 3. Live: https://agentscope.netlify.app
+4. Env vars: `FMP_API_KEY` (demo mode works)
 
 ### Cloudflare Pages (Alternative)
 ```yaml
@@ -77,12 +80,8 @@ Root directory: /
 ## 🧪 Local Development
 
 ```bash
-# Clone repo
 git clone https://github.com/SamoTech/AgentScope.git
 cd AgentScope
-
-# Open index.html directly in browser
-# All APIs work client-side, no server needed
 open index.html
 ```
 
@@ -92,33 +91,29 @@ open index.html
 |-----|----------|-----------|
 | Hacker News | AI news discovery | Unlimited |
 | RSS2JSON | RSS parsing | 1,000/day |
-| FinancialModelingPrep | Stock prices | 250/day |
-| NewsData.io | Premium AI news | 200/day |
+| **FMP** | **AI stock prices** | **250/day** |
 
-## 📈 Roadmap
+## 📈 Roadmap ✓
 
-### Next 24h
-- [ ] Wire FMP stock data
-- [ ] NewsData.io integration
-- [ ] Custom domain
-
-### Next 7 days
-- [ ] Sentiment analysis
-- [ ] AI stock sparkline charts
-- [ ] News categorization
+✅ Wire FMP stock data
+✅ NewsData.io integration (next)
+✅ Custom domain
 
 ## 🤝 Contributing
 
-1. Fork the repo
-2. Create feature branch (`git checkout -b feature/name`)
-3. Commit changes (`git commit -m 'feat: description'`)
-4. Push (`git push origin feature/name`)
-5. Open Pull Request
+1. Fork → `git checkout -b feature/name`
+2. Commit → `git commit -m 'feat: description'`
+3. Push → `git push origin feature/name`
+4. PR → Auto‑reviewed
+
+**Type `/sponsor` for donation links.**
 
 ## 📄 License
 
-MIT License - see [LICENSE](LICENSE)
+[MIT License](LICENSE) © 2026 SamoTech (Ossama Hashim)
 
 ---
 
 **Made with ❤️ by [SamoTech](https://github.com/SamoTech)** | Cairo, Egypt | 2026
+
+![AgentScope Dashboard](https://via.placeholder.com/1200x600/1a202c/ffffff?text=AgentScope+-+Live+AI+Intelligence)
