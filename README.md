@@ -3,9 +3,9 @@
 **AI Agents Intelligence Center**
 
 AgentScope is a lightweight, production-ready **AI intelligence dashboard** that brings together:
-- Live **AI agents news** from multiple sources.
-- Live **AI market data** for the main infrastructure and agent-related stocks.
-- A clean, responsive **single-page UI** that can be hosted anywhere (Netlify, Cloudflare Pages, GitHub Pages).
+- Live **AI agents news** from multiple sources with **sentiment analysis** and **category classification**.
+- Live **AI market data** for the main infrastructure and agent-related stocks with **sparkline charts**.
+- A clean, responsive **single-page UI** with **light/dark themes** that can be hosted anywhere (Netlify, Cloudflare Pages, GitHub Pages).
 
 It is designed as a **reference implementation** for dashboards that monitor agentic AI ecosystems (frameworks, infra, products) without any backend services.
 
@@ -21,55 +21,79 @@ It is designed as a **reference implementation** for dashboards that monitor age
 
 - Best viewed on desktop, fully responsive on mobile.
 - Auto-refreshes every 5 minutes for both market and news data.
+- **Theme toggle** (T key) for light/dark mode.
+- **Keyboard shortcuts** (R = refresh, T = theme).
 
 ---
 
-## 📦 Project structure
+## 📦 Project Structure
 
 ```text
 AgentScope/
-├─ index.html          # Main single-page dashboard (AI Market + News panels)
+├─ index.html          # Main single-page dashboard (all-in-one: HTML + CSS + JS)
 ├─ README.md           # Project documentation (you are here)
 ├─ LICENSE             # MIT license
 ├─ FUNDING.yml         # GitHub Sponsors / PayPal info
 ├─ css/
-│  └─ style.css        # Dark theme, layout, responsive styles
+│  └─ style.css        # (legacy - superseded by embedded CSS in v1.1)
 ├─ js/
-│  └─ app.js           # All client-side logic (stocks, news, filters, auto-refresh)
+│  └─ app.js           # (legacy - superseded by embedded JS in v1.1)
 └─ .github/
    └─ workflows/
-      ├─ sponsor.yml   # /sponsor workflow and sponsor automation
-      └─ deploy-pages.yml (optional) # GitHub Pages workflow (not required on Netlify)
+      └─ sponsor.yml   # /sponsor workflow and sponsor automation
 ```
+
+**Note:** v1.1 uses a **single-file architecture** (index.html contains all CSS and JS) for maximum portability and zero build requirements.
 
 ---
 
 ## 🚀 Features
 
-### AI Market Overview ✓
-- **Live AI infrastructure stock prices** (NVDA, AMD, MSFT, GOOGL, META, AVGO, ARM).
-- **Real-time % change** with green/red coloring for quick sentiment.
-- **Segment tags** (GPU, Cloud, Agent Platform, Networking, Chips/IP).
-- **Segment filtering** to focus on a specific part of the AI stack.
+### v1.1 — Current Production Version ✅
 
-### AI Agents News Feed ✓
+#### AI Market Overview
+- **Live AI infrastructure stock prices** (NVDA, AMD, MSFT, GOOGL, META, AVGO, ARM, PLTR, ORCL).
+- **Real-time % change** with green/red coloring for quick sentiment.
+- **Canvas sparkline charts** on every stock card showing intraday trend visualization.
+- **Segment tags** (🖥 GPU/Infra, ☁️ Cloud, 🤖 Agents, 🔗 Networking, 💡 Chips/IP, 📊 Data/AI).
+- **Segment filtering** to focus on a specific part of the AI stack.
+- **Mock data fallback** — if FMP API fails, shows plausible demo data (no broken UI).
+
+#### AI Agents News Feed
 - **Live news** from:
-  - Hacker News
+  - Hacker News (top stories)
   - TechCrunch AI
   - VentureBeat AI
   - AI News
-- **RSS + API aggregation** using rss2json + HN JSON API.
-- **Real-time search** on titles and descriptions.
+- **Sentiment badges** on every article: 📈 Bullish / 📉 Bearish / ➡ Neutral (keyword-based classification).
+- **Category tags**: 🤖 Agents / 🔬 Research / ⚙️ Infra / 💰 Funding (auto-classified).
+- **Category filter row** for one-click news triage.
+- **Cross-source deduplication** prevents duplicate articles.
+- **Real-time search** on titles and descriptions (280ms debounce).
 - **Source filter** to narrow down by publisher.
+- **Read time estimates** computed from article length.
 - **Auto-refresh** every 5 minutes to keep the feed fresh.
 
-### Professional UI ✓
-- **Dark themed**, responsive layout (desktop + mobile).
-- **Top KPI bar**: last sync time, AI stocks count, articles count, LIVE indicator.
-- **Two main panels**:
-  - AI Market Overview (top)
-  - AI Agents News Feed (bottom)
-- Optimized for quick scanning of both market + narrative.
+#### Professional UI
+- **Dark + Light themes** with smooth toggle (T key or button).
+- **IBM Plex Mono + Syne fonts** for distinctive terminal aesthetic.
+- **Noise texture overlay** for visual depth.
+- **Loading skeleton cards** with shimmer animation (no blank flashes).
+- **Smooth fade-in animations** with staggered delays per card.
+- **Top KPI bar**: Last Sync | AI Stocks | Articles | **Top Mover** | **Next Refresh Countdown**.
+- **Keyboard shortcuts**: `R` = refresh, `T` = toggle theme.
+- Optimized for quick scanning of both market signals + narrative.
+
+#### Code Architecture
+- **IIFE module pattern** — all code scoped, zero globals leaked.
+- **Single state object** — one source of truth for all app state.
+- **Labeled sections** with clear separation:
+  ```
+  CONFIG → STATE → UTIL → SENTIMENT → CATEGORY → SPARKLINES → 
+  STOCKS → NEWS → KPI → COUNTDOWN → THEME → EVENTS → INIT
+  ```
+- **CSS custom properties** for theming (easy to customize).
+- **Zero build step** — open `index.html` directly in any browser.
 
 ---
 
@@ -80,8 +104,8 @@ AgentScope/
 | HTML, CSS, JavaScript | **Netlify** | Hacker News API |
 | Vanilla JS, no framework | Global CDN | **TechCrunch AI RSS** |
 | Responsive layout | Auto-deploy | **VentureBeat AI RSS** |
-| | | **AI News RSS** |
-| | | **FMP Stock API** |
+| IBM Plex Mono + Syne fonts | | **AI News RSS** |
+| Canvas API for sparklines | | **FMP Stock API** |
 
 ---
 
@@ -96,6 +120,8 @@ AgentScope/
 | META | Meta | AI Infra/LLaMA |
 | AVGO | Broadcom | AI Networking |
 | ARM | Arm Holdings | AI Chips/IP |
+| **PLTR** | **Palantir** | **Data/AI** |
+| **ORCL** | **Oracle** | **Cloud** |
 
 ---
 
@@ -131,6 +157,14 @@ Build output: /
 Root directory: /
 ```
 
+### GitHub Pages (Alternative)
+
+```yaml
+# Enable GitHub Pages in repo settings
+# Point to main branch / root
+# Your site will be at: https://<username>.github.io/<repo>
+```
+
 ---
 
 ## 🧪 Local Development
@@ -141,7 +175,9 @@ git clone https://github.com/SamoTech/AgentScope.git
 cd AgentScope
 
 # Open the dashboard in your browser
-open index.html   # or use Live Server in VS Code
+open index.html   # macOS
+# OR use Live Server extension in VS Code
+# OR python3 -m http.server 8000
 ```
 
 All logic runs in the browser – no backend required.
@@ -162,28 +198,49 @@ You can replace or extend these with your own keys or self-hosted proxies.
 
 ## 📈 Roadmap
 
-### ✅ Completed
-- Wire **FMP stock data** into AI Market panel.
-- RSS news integration for **TechCrunch AI**, **VentureBeat AI**, **AI News**.
-- Professional, responsive **two-panel UI** with KPIs.
-- Sponsor workflow + FUNDING configuration.
+### ✅ Completed (v1.0 Base)
+- FMP stock data in AI Market panel.
+- RSS news integration (TechCrunch AI, VentureBeat AI, AI News, HN).
+- Professional dark-themed two-panel UI with KPIs.
+- Segment + source filters, real-time search.
+- Auto-refresh every 5 minutes.
+- Netlify deploy.
 
-### 🔜 Short-term
-- Integrate **NewsData.io** or similar for richer AI/agent news.
-- Add **custom domain** (for example, `agentscope.dev`).
-- Basic **sentiment badges** on news cards (bullish / bearish / neutral).
-- **Stock sparklines** for top 3 tickers (NVDA, AMD, MSFT).
+### ✅ Completed (v1.1 Upgrade)
+- **Sparkline charts** on stock cards (Canvas 2D).
+- **Sentiment badges** on news cards (keyword-based: bullish/bearish/neutral).
+- **Category tags + filter** (🤖 Agents / 🔬 Research / ⚙️ Infra / 💰 Funding).
+- **Light / Dark theme toggle** with CSS custom properties.
+- **Loading skeletons** with shimmer animation.
+- **Top Mover KPI** + refresh countdown timer.
+- **News deduplication** across sources.
+- **Read time estimates** on articles.
+- **Keyboard shortcuts** (R = refresh, T = theme).
+- Expanded to **9 stocks** (added PLTR, ORCL).
+- Modular **IIFE JS architecture** with labeled sections.
+- Proper **error fallback** (mock data if FMP fails).
+- **Search debounce** (280ms).
 
-### 📅 Medium-term
-- Tagging of articles into **Agents / Infra / Apps / Research**.
-- Configurable **watchlist** for custom AI tickers.
-- Simple **alerting** (e.g., highlight when daily change > X%).
-- Toggle between **light / dark themes**.
+### 🔜 Short-Term (v1.2 — Next Sprint)
+- [ ] **GitHub Trending AI Repos** third panel.
+- [ ] **Netlify Function** as FMP API proxy (hide key from client).
+- [ ] **Custom domain** (e.g., `agentscope.dev`).
+- [ ] **PWA manifest + service worker** for offline support.
+- [ ] **User watchlist** stored in `localStorage`.
 
-### 🧪 Experimental ideas
-- Local or remote **LLM summarization** of news clusters.
-- **Multi-agent orchestration** view (map frameworks, tools, LLMs).
-- Integration with **GitHub issues** to log interesting events.
+### 📅 Medium-Term (v2.0)
+- [ ] **Real sentiment via Claude API** (batch classification with confidence scores).
+- [ ] **Configurable watchlist via URL hash** (e.g., `#NVDA,TSLA,PLTR`).
+- [ ] **AI Fear & Greed Index** visualization (composite of market signals).
+- [ ] **Simple alerting**: highlight stocks with daily change > 5%.
+- [ ] **Multi-source aggregation scoring** (weight HN, TC, VB differently).
+
+### 🧪 Experimental (v3.0+)
+- [ ] **LLM-powered news cluster summarization**.
+- [ ] **Multi-agent orchestration framework map** (visual graph).
+- [ ] **GitHub issue integration** for event logging.
+- [ ] **Real-time WebSocket price feed** (replace polling).
+- [ ] **Sharable snapshot URLs** (freeze a moment in time).
 
 ---
 
@@ -224,6 +281,20 @@ If you find AgentScope useful, consider supporting ongoing development:
 ## 📄 License
 
 [MIT License](LICENSE) © 2026 SamoTech (Ossama Hashim)
+
+---
+
+## 🎓 Learn More
+
+For a **complete analysis, refactoring plan, and AI development prompt**, see:
+- [AGENTSCOPE_ANALYSIS_AND_PROMPT.md](docs/AGENTSCOPE_ANALYSIS_AND_PROMPT.md) *(coming soon)*
+
+This document includes:
+- Full assessment of v1.0 → v1.1 changes
+- 14 identified issues + solutions
+- 15 enhancement proposals
+- Complete AI-assisted development prompt for future features
+- Roadmap integration
 
 ---
 
