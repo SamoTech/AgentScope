@@ -1,60 +1,70 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" width="1200" height="360">
   <defs>
-    <linearGradient id="bg-as" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#050a0f"/>
-      <stop offset="100%" style="stop-color:#08121a"/>
+    <linearGradient id="bgAS" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#12001f"/>
     </linearGradient>
-    <linearGradient id="accent-as" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#ffd166"/>
-      <stop offset="100%" style="stop-color:#ff9f1c"/>
-    </linearGradient>
-    <pattern id="scan-as" width="1" height="8" patternUnits="userSpaceOnUse">
-      <line x1="0" y1="0" x2="1280" y2="0" stroke="#0c1e2b" stroke-width="0.5"/>
-    </pattern>
-    <filter id="glow-as">
-      <feGaussianBlur stdDeviation="6" result="blur"/>
+    <filter id="glowAS">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
-  <rect width="1280" height="320" fill="url(#bg-as)"/>
-  <rect width="1280" height="320" fill="url(#scan-as)"/>
-  <rect x="0" y="0" width="4" height="320" fill="url(#accent-as)"/>
-  <rect x="0" y="0" width="1280" height="28" fill="#0a1520" opacity="0.9"/>
-  <text x="20"  y="18" font-family="'JetBrains Mono',monospace" font-size="12" fill="#00d68f">NVDA ▲2.4%</text>
-  <text x="130" y="18" font-family="'JetBrains Mono',monospace" font-size="12" fill="#ff4d6a">PLTR ▼1.1%</text>
-  <text x="240" y="18" font-family="'JetBrains Mono',monospace" font-size="12" fill="#00d68f">MSFT ▲0.8%</text>
-  <text x="350" y="18" font-family="'JetBrains Mono',monospace" font-size="12" fill="#ffd166">AMD  ─0.0%</text>
-  <text x="460" y="18" font-family="'JetBrains Mono',monospace" font-size="12" fill="#00d68f">META ▲3.2%</text>
-  <text x="570" y="18" font-family="'JetBrains Mono',monospace" font-size="12" fill="#ff4d6a">INTC ▼0.6%</text>
-  <text x="680" y="18" font-family="'JetBrains Mono',monospace" font-size="12" fill="#00d68f">GOOGL▲1.9%</text>
-  <text x="800" y="18" font-family="'JetBrains Mono',monospace" font-size="12" fill="#ffd166">AMZN ─0.2%</text>
-  <g opacity="0.28" transform="translate(900, 60)">
-    <polyline points="0,140 40,100 80,120 120,70 160,90 200,40 240,60 280,20 320,50"
-              fill="none" stroke="#ffd166" stroke-width="2"/>
-    <polyline points="0,140 40,100 80,120 120,70 160,90 200,40 240,60 280,20 320,50 320,160 0,160"
-              fill="#ffd166" opacity="0.08"/>
-    <circle cx="320" cy="50" r="5" fill="#ffd166"/>
+  <rect width="1200" height="360" fill="url(#bgAS)"/>
+  <!-- Subtle grid -->
+  <g opacity="0.04" stroke="#ffd166" stroke-width="1">
+    <line x1="0" y1="90" x2="1200" y2="90"/>
+    <line x1="0" y1="180" x2="1200" y2="180"/>
+    <line x1="0" y1="270" x2="1200" y2="270"/>
+    <line x1="120" y1="0" x2="120" y2="360"/>
+    <line x1="240" y1="0" x2="240" y2="360"/>
   </g>
-  <g transform="translate(80, 90)" filter="url(#glow-as)">
-    <rect x="0" y="0" width="120" height="88" rx="10" fill="#08121a" stroke="url(#accent-as)" stroke-width="2.5"/>
-    <circle cx="16" cy="14" r="5" fill="#ff5f57"/>
-    <circle cx="32" cy="14" r="5" fill="#febc2e"/>
-    <circle cx="48" cy="14" r="5" fill="#28c840"/>
-    <text x="10" y="40" font-family="'JetBrains Mono',Consolas,monospace" font-size="13" fill="#ffd166">$ scan --ai</text>
-    <text x="10" y="60" font-family="'JetBrains Mono',Consolas,monospace" font-size="13" fill="#00d68f">✓ 30 stocks</text>
-    <text x="10" y="78" font-family="'JetBrains Mono',Consolas,monospace" font-size="13" fill="#ffd166">█</text>
+  <!-- Terminal/scope icon -->
+  <g transform="translate(62, 100)" filter="url(#glowAS)">
+    <!-- Screen frame -->
+    <rect x="0" y="0" width="150" height="100" rx="8" fill="none" stroke="#ffd166" stroke-width="1.8"/>
+    <rect x="3" y="3" width="144" height="94" rx="6" fill="#0d0015"/>
+    <!-- Title bar -->
+    <rect x="3" y="3" width="144" height="16" rx="6" fill="#1a0030"/>
+    <circle cx="14" cy="11" r="3.5" fill="#ff5f57"/>
+    <circle cx="25" cy="11" r="3.5" fill="#ffbd2e"/>
+    <circle cx="36" cy="11" r="3.5" fill="#28c840"/>
+    <text x="75" y="14" font-family="monospace" font-size="8" fill="#ffd166" text-anchor="middle" opacity="0.8">AgentScope Pro</text>
+    <!-- Ticker tape bar -->
+    <rect x="3" y="22" width="144" height="12" fill="#100020"/>
+    <text x="8" y="31" font-family="monospace" font-size="7" fill="#00d68f">NVDA +4.2%</text>
+    <text x="65" y="31" font-family="monospace" font-size="7" fill="#ff4d6a">AI -1.1%</text>
+    <text x="108" y="31" font-family="monospace" font-size="7" fill="#00d68f">PLTR +2.8%</text>
+    <!-- Mini stock cards -->
+    <rect x="6" y="37" width="42" height="28" rx="3" fill="#1a0030" stroke="#ffd166" stroke-width="0.5"/>
+    <text x="10" y="47" font-family="monospace" font-size="7" fill="#ffd166" font-weight="bold">NVDA</text>
+    <text x="10" y="57" font-family="monospace" font-size="6" fill="#00d68f">+4.2%</text>
+    <rect x="52" y="37" width="42" height="28" rx="3" fill="#1a0030" stroke="#ffd166" stroke-width="0.5"/>
+    <text x="56" y="47" font-family="monospace" font-size="7" fill="#ffd166" font-weight="bold">AMD</text>
+    <text x="56" y="57" font-family="monospace" font-size="6" fill="#ff4d6a">-0.8%</text>
+    <rect x="98" y="37" width="42" height="28" rx="3" fill="#1a0030" stroke="#ffd166" stroke-width="0.5"/>
+    <text x="102" y="47" font-family="monospace" font-size="7" fill="#ffd166" font-weight="bold">PLTR</text>
+    <text x="102" y="57" font-family="monospace" font-size="6" fill="#00d68f">+2.8%</text>
+    <!-- Sparkline mini chart -->
+    <polyline points="6,85 20,80 35,83 50,75 65,78 80,72 95,76 110,70 125,73 140,68" fill="none" stroke="#ffd166" stroke-width="1.2" opacity="0.9"/>
+    <!-- Ticker text -->
+    <rect x="3" y="88" width="144" height="9" rx="0" fill="#100020"/>
+    <text x="8" y="95" font-family="monospace" font-size="6" fill="#ffd166" opacity="0.7">30 stocks · 13 sources · $0/mo</text>
   </g>
-  <text x="230" y="156" font-family="'JetBrains Mono','SF Mono',monospace" font-size="72" font-weight="700"
-        letter-spacing="-1" fill="#e8f4ff">Agent</text>
-  <text x="544" y="156" font-family="'JetBrains Mono','SF Mono',monospace" font-size="72" font-weight="700"
-        letter-spacing="-1" fill="url(#accent-as)">Scope</text>
-  <text x="232" y="196" font-family="monospace" font-size="19" fill="#ffd166"
-        letter-spacing="3" opacity="0.85">AI INTELLIGENCE TERMINAL · ZERO DEPS</text>
-  <rect x="230" y="212" width="560" height="2" fill="url(#accent-as)" opacity="0.45"/>
-  <rect x="230" y="232" width="120" height="28" rx="14" fill="#ffd166" opacity="0.15"/>
-  <text x="290" y="251" font-family="monospace" font-size="13" fill="#ffd166" text-anchor="middle">30 AI Stocks</text>
-  <rect x="362" y="232" width="110" height="28" rx="14" fill="#ffd166" opacity="0.15"/>
-  <text x="417" y="251" font-family="monospace" font-size="13" fill="#ffd166" text-anchor="middle">13 News Srcs</text>
-  <rect x="484" y="232" width="110" height="28" rx="14" fill="#ffd166" opacity="0.15"/>
-  <text x="539" y="251" font-family="monospace" font-size="13" fill="#ffd166" text-anchor="middle">1 File · $0</text>
+  <!-- Title -->
+  <text x="278" y="148" font-family="'Segoe UI', Arial, sans-serif" font-size="54" font-weight="800" fill="#ffffff" letter-spacing="-1">AgentScope</text>
+  <text x="278" y="212" font-family="'Segoe UI', Arial, sans-serif" font-size="54" font-weight="800" fill="#ffd166" letter-spacing="-1">Pro</text>
+  <!-- Tagline -->
+  <text x="280" y="254" font-family="'Segoe UI', Arial, sans-serif" font-size="21" fill="#8b949e">Zero-dependency AI intelligence terminal — 30 stocks, 13 news sources, $0/mo</text>
+  <!-- Badges -->
+  <g transform="translate(280, 282)">
+    <rect x="0" y="0" width="80" height="28" rx="14" fill="#ffd166" opacity="0.15"/>
+    <text x="40" y="19" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#ffd166" text-anchor="middle" font-weight="600">0 deps</text>
+    <rect x="92" y="0" width="80" height="28" rx="14" fill="#00d68f" opacity="0.15"/>
+    <text x="132" y="19" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#00d68f" text-anchor="middle" font-weight="600">1 file</text>
+    <rect x="184" y="0" width="110" height="28" rx="14" fill="#5b9bd5" opacity="0.15"/>
+    <text x="239" y="19" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#5b9bd5" text-anchor="middle" font-weight="600">30 Stocks</text>
+    <rect x="306" y="0" width="110" height="28" rx="14" fill="#888" opacity="0.15"/>
+    <text x="361" y="19" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#aaa" text-anchor="middle" font-weight="600">MIT License</text>
+  </g>
+  <text x="1150" y="340" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#ffd166" opacity="0.6" text-anchor="end" font-weight="600">SamoTech</text>
 </svg>
